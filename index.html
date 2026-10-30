@@ -1,0 +1,2372 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pranav P // Student Developer & AIML Engineer</title>
+  <meta name="description" content="Portfolio of Pranav P — 3rd year AIML student at K S Institute of Technology, passionate about web development, AI, and building real-world software." />
+  
+  <!-- Google Fonts: Space Grotesk, JetBrains Mono, Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS v3 via Official Play CDN with Custom Theme Config -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            carbon: {
+              DEFAULT: '#0d1117',
+              50: '#1e2633',
+              100: '#161b22',
+              200: '#12161d',
+              300: '#0d1117',
+              400: '#090d12',
+              border: '#21262d',
+              muted: '#30363d'
+            },
+            emerald: {
+              DEFAULT: '#10b981',
+              neon: '#10b981',
+              glow: '#059669',
+              light: '#34d399',
+              accent: '#6ee7b7'
+            },
+            lime: {
+              neon: '#a3e635',
+              bright: '#bef264',
+              electric: '#84cc16'
+            }
+          },
+          fontFamily: {
+            sans: ['Space Grotesk', 'Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+            body: ['Inter', 'sans-serif']
+          },
+          animation: {
+            'radar-pulse': 'radarPulse 2s cubic-bezier(0, 0, 0.2, 1) infinite',
+            'float-slow': 'float 6s ease-in-out infinite',
+            'glow-pulse': 'glowPulse 3s ease-in-out infinite',
+            'gradient-x': 'gradientX 8s ease infinite'
+          },
+          keyframes: {
+            radarPulse: {
+              '0%': { transform: 'scale(1)', opacity: '0.8' },
+              '100%': { transform: 'scale(2.4)', opacity: '0' }
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-10px)' }
+            },
+            glowPulse: {
+              '0%, 100%': { opacity: '0.4', filter: 'drop-shadow(0 0 15px rgba(16, 185, 129, 0.3))' },
+              '50%': { opacity: '0.8', filter: 'drop-shadow(0 0 25px rgba(16, 185, 129, 0.6))' }
+            },
+            gradientX: {
+              '0%, 100%': { 'background-size': '200% 200%', 'background-position': 'left center' },
+              '50%': { 'background-size': '200% 200%', 'background-position': 'right center' }
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0d1117;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #21262d;
+      border-radius: 4px;
+      border: 1px solid rgba(16, 185, 129, 0.2);
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #10b981;
+    }
+
+    /* Cyber backdrop blur and scanlines */
+    .cyber-glass {
+      background: rgba(13, 17, 23, 0.78);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(16, 185, 129, 0.18);
+    }
+    .cyber-card {
+      background: rgba(22, 27, 34, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(33, 38, 45, 0.9);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .cyber-card:hover {
+      border-color: rgba(16, 185, 129, 0.4);
+      box-shadow: 0 10px 30px -10px rgba(16, 185, 129, 0.25);
+    }
+    .cyber-grid-line {
+      background-size: 40px 40px;
+      background-image: 
+        linear-gradient(to right, rgba(16, 185, 129, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(16, 185, 129, 0.04) 1px, transparent 1px);
+    }
+  </style>
+
+  <!-- React 18 & ReactDOM -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <!-- Babel for JSX compilation in-browser -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body class="bg-carbon text-slate-100 font-sans selection:bg-emerald-500 selection:text-carbon min-h-screen overflow-x-hidden antialiased">
+  <div id="root"></div>
+
+  <!-- React Application Source -->
+  <script type="text/babel">
+    const { useState, useEffect, useRef, useMemo, useCallback } = React;
+
+    // --- ICON COMPONENTS ---
+    const IconTerminal = ({ className = "w-4 h-4" }) => (
+      <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="4 17 10 11 4 5"></polyline>
+        <line x1="12" y1="19" x2="20" y2="19"></line>
+      </svg>
+    );
+
+    const IconSparkles = ({ className = "w-4 h-4" }) => (
+      <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path>
+      </svg>
+    );
+
+    const IconArrowRight = ({ className = "w-4 h-4" }) => (
+      <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+        <polyline points="12 5 19 12 12 19"></polyline>
+      </svg>
+    );
+
+    const IconDownload = ({ className = "w-4 h-4" }) => (
+      <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+        <polyline points="7 10 12 15 17 10"></polyline>
+        <line x1="12" y1="15" x2="12" y2="3"></line>
+      </svg>
+    );
+
+    const IconMenu = ({ className = "w-6 h-6" }) => (
+      <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    );
+
+    const IconX = ({ className = "w-6 h-6" }) => (
+      <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    );
+
+    const IconCheck = ({ className = "w-4 h-4" }) => (
+      <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="20 6 9 17 4 12"></polyline>
+      </svg>
+    );
+
+    const IconCopy = ({ className = "w-4 h-4" }) => (
+      <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
+        <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
+      </svg>
+    );
+
+    const IconCode = ({ className = "w-4 h-4" }) => (
+      <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="16 18 22 12 16 6"></polyline>
+        <polyline points="8 6 2 12 8 18"></polyline>
+      </svg>
+    );
+
+    // --- HTML5 CANVAS MATRIX-DOT GRID COMPONENT ---
+    // Features:
+    // 1. Perspective tilt based on smoothed mouse offset from center
+    // 2. Interactive ripple waves dispersing outward on cursor hover & click
+    // 3. Proximity neon illumination (dots brighten & swell to emerald/lime)
+    // 4. Subtle ambient breathing wave so the grid remains dynamic even when idle
+    // 5. Constellation micro-lines connecting dots near cursor
+    const MatrixGridCanvas = ({ rippleMultiplier = 1, showConstellations = true }) => {
+      const canvasRef = useRef(null);
+
+      useEffect(() => {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        let animationFrameId;
+
+        let width = (canvas.width = window.innerWidth);
+        let height = (canvas.height = window.innerHeight);
+
+        // Smoothed mouse state
+        const mouse = {
+          x: width / 2,
+          y: height / 2,
+          targetX: width / 2,
+          targetY: height / 2,
+          isHovering: false,
+          speed: 0
+        };
+
+        let lastMousePos = { x: width / 2, y: height / 2 };
+
+        // Shockwaves spawned by clicks or fast movements
+        const shockwaves = [];
+
+        const handleResize = () => {
+          width = canvas.width = window.innerWidth;
+          height = canvas.height = window.innerHeight;
+        };
+
+        const handleMouseMove = (e) => {
+          const rect = canvas.getBoundingClientRect();
+          mouse.targetX = e.clientX - rect.left;
+          mouse.targetY = e.clientY - rect.top;
+          mouse.isHovering = true;
+
+          // Calculate mouse velocity
+          const distMoved = Math.hypot(mouse.targetX - lastMousePos.x, mouse.targetY - lastMousePos.y);
+          mouse.speed = Math.min(distMoved, 30);
+          lastMousePos = { x: mouse.targetX, y: mouse.targetY };
+
+          // Spawn mini shockwave on rapid movement
+          if (distMoved > 25 && shockwaves.length < 5) {
+            shockwaves.push({
+              x: mouse.targetX,
+              y: mouse.targetY,
+              radius: 5,
+              maxRadius: 160 * rippleMultiplier,
+              alpha: 0.6,
+              speed: 4.5
+            });
+          }
+        };
+
+        const handleMouseLeave = () => {
+          mouse.isHovering = false;
+          mouse.targetX = width / 2;
+          mouse.targetY = height / 2;
+        };
+
+        const handleClick = (e) => {
+          const rect = canvas.getBoundingClientRect();
+          const clickX = e.clientX - rect.left;
+          const clickY = e.clientY - rect.top;
+          
+          shockwaves.push({
+            x: clickX,
+            y: clickY,
+            radius: 5,
+            maxRadius: 280 * rippleMultiplier,
+            alpha: 0.9,
+            speed: 6.5
+          });
+        };
+
+        window.addEventListener('resize', handleResize);
+        window.addEventListener('mousemove', handleMouseMove);
+        document.addEventListener('mouseleave', handleMouseLeave);
+        window.addEventListener('click', handleClick);
+
+        // Grid Configuration
+        const spacing = width < 640 ? 26 : 32;
+        let time = 0;
+
+        const render = () => {
+          time += 0.022;
+
+          // Smoothly interpolate mouse coordinates (LERP)
+          mouse.x += (mouse.targetX - mouse.x) * 0.08;
+          mouse.y += (mouse.targetY - mouse.y) * 0.08;
+
+          ctx.clearRect(0, 0, width, height);
+
+          // Update active shockwaves
+          for (let i = shockwaves.length - 1; i >= 0; i--) {
+            const sw = shockwaves[i];
+            sw.radius += sw.speed;
+            sw.alpha *= 0.96;
+            if (sw.radius >= sw.maxRadius || sw.alpha <= 0.02) {
+              shockwaves.splice(i, 1);
+            }
+          }
+
+          const cols = Math.ceil(width / spacing) + 2;
+          const rows = Math.ceil(height / spacing) + 2;
+
+          // Parallax & Perspective tilt calculation
+          const normX = (mouse.x - width / 2) / (width / 2);
+          const normY = (mouse.y - height / 2) / (height / 2);
+          const maxPerspectiveShift = 14;
+
+          const points = [];
+
+          for (let c = 0; c < cols; c++) {
+            for (let r = 0; r < rows; r++) {
+              const baseGridX = (c - 1) * spacing;
+              const baseGridY = (r - 1) * spacing;
+
+              // Perspective 3D tilt offset
+              const depthFactor = (baseGridY / height) * 0.8 + 0.6;
+              const perspX = baseGridX + normX * maxPerspectiveShift * depthFactor;
+              const perspY = baseGridY + normY * maxPerspectiveShift * (baseGridX / width * 0.5 + 0.7);
+
+              // Idle organic sine breathing
+              const ambientRipple = Math.sin(c * 0.28 + time) * Math.cos(r * 0.28 + time * 0.8) * 2.5;
+
+              // Interactive mouse ripple displacement
+              const distToMouse = Math.hypot(perspX - mouse.x, perspY - mouse.y);
+              const interactionRadius = 180 * rippleMultiplier;
+              let dispX = 0;
+              let dispY = 0;
+              let proximityFactor = 0;
+
+              if (distToMouse < interactionRadius) {
+                proximityFactor = 1 - distToMouse / interactionRadius;
+                // Elastic radial push away from mouse
+                const angle = Math.atan2(perspY - mouse.y, perspX - mouse.x);
+                const pushDist = Math.sin(proximityFactor * Math.PI) * 12 * rippleMultiplier;
+                dispX = Math.cos(angle) * pushDist;
+                dispY = Math.sin(angle) * pushDist;
+              }
+
+              // Apply shockwaves
+              let shockwaveEffect = 0;
+              for (let k = 0; k < shockwaves.length; k++) {
+                const sw = shockwaves[k];
+                const d = Math.hypot(perspX - sw.x, perspY - sw.y);
+                const ringDist = Math.abs(d - sw.radius);
+                if (ringDist < 40) {
+                  const ringFactor = (1 - ringDist / 40) * sw.alpha;
+                  shockwaveEffect += ringFactor;
+                  const angle = Math.atan2(perspY - sw.y, perspX - sw.x);
+                  dispX += Math.cos(angle) * ringFactor * 16;
+                  dispY += Math.sin(angle) * ringFactor * 16;
+                }
+              }
+
+              const finalX = perspX + dispX;
+              const finalY = perspY + dispY + ambientRipple;
+
+              // Dot size and color interpolation based on proximity & shockwaves
+              const intensity = Math.min(1, proximityFactor * 1.2 + shockwaveEffect);
+              const dotRadius = 1.1 + intensity * 2.2;
+
+              let dotColor;
+              if (intensity > 0.6) {
+                // Bright lime-emerald cyber highlight
+                dotColor = `rgba(163, 230, 53, ${0.4 + intensity * 0.55})`;
+              } else if (intensity > 0.15) {
+                // Crisp neon emerald
+                dotColor = `rgba(16, 185, 129, ${0.25 + intensity * 0.6})`;
+              } else {
+                // Subtle matte carbon-emerald background dot
+                dotColor = 'rgba(16, 185, 129, 0.14)';
+              }
+
+              // Draw Dot
+              ctx.beginPath();
+              ctx.arc(finalX, finalY, dotRadius, 0, Math.PI * 2);
+              ctx.fillStyle = dotColor;
+
+              // Add subtle glow only to excited dots for 60fps performance
+              if (intensity > 0.4) {
+                ctx.shadowColor = intensity > 0.7 ? '#a3e635' : '#10b981';
+                ctx.shadowBlur = 8 * intensity;
+              } else {
+                ctx.shadowBlur = 0;
+              }
+
+              ctx.fill();
+
+              // Collect near-mouse points for constellation micro-mesh
+              if (showConstellations && distToMouse < 90 && intensity > 0.3) {
+                points.push({ x: finalX, y: finalY, intensity });
+              }
+            }
+          }
+
+          // Draw subtle interactive constellation micro-lines
+          if (showConstellations && points.length > 0) {
+            ctx.shadowBlur = 0;
+            for (let i = 0; i < points.length; i++) {
+              for (let j = i + 1; j < points.length; j++) {
+                const p1 = points[i];
+                const p2 = points[j];
+                const d = Math.hypot(p1.x - p2.x, p1.y - p2.y);
+                if (d < 50) {
+                  ctx.beginPath();
+                  ctx.moveTo(p1.x, p1.y);
+                  ctx.lineTo(p2.x, p2.y);
+                  const lineAlpha = (1 - d / 50) * Math.min(p1.intensity, p2.intensity) * 0.35;
+                  ctx.strokeStyle = `rgba(16, 185, 129, ${lineAlpha})`;
+                  ctx.lineWidth = 0.8;
+                  ctx.stroke();
+                }
+              }
+            }
+          }
+
+          animationFrameId = requestAnimationFrame(render);
+        };
+
+        render();
+
+        return () => {
+          cancelAnimationFrame(animationFrameId);
+          window.removeEventListener('resize', handleResize);
+          window.removeEventListener('mousemove', handleMouseMove);
+          document.removeEventListener('mouseleave', handleMouseLeave);
+          window.removeEventListener('click', handleClick);
+        };
+      }, [rippleMultiplier, showConstellations]);
+
+      return (
+        <canvas
+          ref={canvasRef}
+          id="matrix-dot-grid"
+          className="fixed inset-0 pointer-events-none z-0"
+          style={{ opacity: 0.95 }}
+          aria-hidden="true"
+        />
+      );
+    };
+
+    // --- FLOATING FROSTED-GLASS NAVIGATION BAR ---
+    const Navbar = ({ onDownloadResume, onViewProjects }) => {
+      const [isScrolled, setIsScrolled] = useState(false);
+      const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+      const [activeSection, setActiveSection] = useState('home');
+
+      const navLinks = [
+        { name: 'About', href: '#about', id: 'nav-link-about' },
+        { name: 'Projects', href: '#projects', id: 'nav-link-projects' },
+        { name: 'Skills', href: '#skills', id: 'nav-link-skills' },
+        { name: 'Campus Life', href: '#campus-life', id: 'nav-link-campus' },
+        { name: 'Contact', href: '#contact', id: 'nav-link-contact' }
+      ];
+
+      useEffect(() => {
+        const handleScroll = () => {
+          setIsScrolled(window.scrollY > 20);
+        };
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => window.removeEventListener('scroll', handleScroll);
+      }, []);
+
+      const handleNavClick = (e, href) => {
+        e.preventDefault();
+        setMobileMenuOpen(false);
+        const targetId = href.replace('#', '');
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: 'smooth' });
+          setActiveSection(targetId);
+        }
+      };
+
+      return (
+        <header
+          id="top-navbar"
+          className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+            isScrolled ? 'pt-2 sm:pt-3' : 'pt-4 sm:pt-6'
+          }`}
+        >
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <nav
+              className={`relative rounded-2xl transition-all duration-300 ${
+                isScrolled
+                  ? 'cyber-glass shadow-[0_8px_32px_rgba(0,0,0,0.6)] shadow-emerald-950/20 py-2.5 px-4 sm:px-6'
+                  : 'bg-carbon-100/70 backdrop-blur-md border border-carbon-border/70 py-3.5 px-4 sm:px-6'
+              }`}
+            >
+              {/* Top ambient neon hairline gradient */}
+              <div className="absolute inset-x-8 top-0 h-[1px] bg-gradient-to-r from-transparent via-emerald-500/40 to-transparent pointer-events-none" />
+
+              <div className="flex items-center justify-between">
+                {/* Brand Logo: Pranav P with cyber brackets & glowing dot */}
+                <a
+                  href="#hero"
+                  id="brand-logo"
+                  onClick={(e) => handleNavClick(e, '#hero')}
+                  className="group flex items-center gap-2.5 text-slate-100 hover:text-white transition-all"
+                  aria-label="Pranav P Portfolio Home"
+                >
+                  <div className="relative flex items-center justify-center w-9 h-9 rounded-xl bg-carbon-50 border border-emerald-500/30 group-hover:border-emerald-400 group-hover:shadow-[0_0_15px_rgba(16,185,129,0.35)] transition-all">
+                    <span className="font-mono text-xs font-bold text-emerald-400 group-hover:text-lime-neon transition-colors">
+                      &lt;P/&gt;
+                    </span>
+                    <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-emerald-neon animate-pulse" />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-base sm:text-lg font-bold tracking-tight flex items-center gap-1.5">
+                      <span>Pranav</span>
+                      <span className="text-emerald-neon font-extrabold">P</span>
+                    </span>
+                    <span className="text-[10px] font-mono text-emerald-accent/80 tracking-widest uppercase -mt-1 hidden sm:block">
+                      AIML // KSIT
+                    </span>
+                  </div>
+                </a>
+
+                {/* Desktop Clean Links */}
+                <div className="hidden md:flex items-center gap-1 lg:gap-2">
+                  {navLinks.map((link) => (
+                    <a
+                      key={link.name}
+                      id={link.id}
+                      href={link.href}
+                      onClick={(e) => handleNavClick(e, link.href)}
+                      className={`relative px-3.5 py-1.5 text-sm font-medium rounded-lg transition-all duration-200 group ${
+                        activeSection === link.href.replace('#', '')
+                          ? 'text-emerald-neon bg-emerald-500/10'
+                          : 'text-slate-300 hover:text-emerald-neon hover:bg-carbon-50/70'
+                      }`}
+                    >
+                      <span className="relative z-10 flex items-center gap-1">
+                        <span className="opacity-0 group-hover:opacity-100 text-emerald-neon font-mono text-xs transition-opacity -ml-1">
+                          /
+                        </span>
+                        {link.name}
+                      </span>
+                      {activeSection === link.href.replace('#', '') && (
+                        <span className="absolute bottom-0 left-3 right-3 h-[2px] bg-emerald-neon rounded-full shadow-[0_0_8px_#10b981]" />
+                      )}
+                    </a>
+                  ))}
+                </div>
+
+                {/* Right Action Area */}
+                <div className="hidden sm:flex items-center gap-3">
+                  <button
+                    id="nav-resume-btn"
+                    onClick={onDownloadResume}
+                    className="relative group overflow-hidden px-4 py-2 text-xs font-mono font-semibold rounded-xl text-emerald-300 border border-emerald-500/30 hover:border-emerald-400 bg-carbon-50/80 hover:bg-emerald-500/10 transition-all duration-300 shadow-[0_0_10px_rgba(16,185,129,0.1)] hover:shadow-[0_0_20px_rgba(16,185,129,0.3)] active:scale-95 flex items-center gap-2"
+                  >
+                    <IconDownload className="w-3.5 h-3.5 text-emerald-neon group-hover:-translate-y-0.5 transition-transform" />
+                    <span>Resume.pdf</span>
+                  </button>
+
+                  <a
+                    href="#contact"
+                    id="nav-contact-cta"
+                    onClick={(e) => handleNavClick(e, '#contact')}
+                    className="px-4 py-2 text-xs font-semibold rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-400 text-carbon font-mono font-bold hover:brightness-110 shadow-[0_0_15px_rgba(16,185,129,0.35)] hover:shadow-[0_0_25px_rgba(16,185,129,0.6)] hover:-translate-y-0.5 transition-all duration-200 active:scale-95"
+                  >
+                    Hire Me
+                  </a>
+                </div>
+
+                {/* Mobile Menu Hamburger Button */}
+                <button
+                  id="mobile-menu-toggle"
+                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                  className="md:hidden p-2 rounded-xl text-slate-300 hover:text-white bg-carbon-50 border border-carbon-border hover:border-emerald-500/40 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
+                  aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+                >
+                  {mobileMenuOpen ? <IconX className="w-5 h-5 text-emerald-neon" /> : <IconMenu className="w-5 h-5" />}
+                </button>
+              </div>
+
+              {/* Mobile Drawer Navigation */}
+              {mobileMenuOpen && (
+                <div
+                  id="mobile-dropdown-menu"
+                  className="md:hidden mt-3 pt-3 border-t border-carbon-border/70 flex flex-col gap-1.5 pb-2 animate-fadeIn"
+                >
+                  {navLinks.map((link) => (
+                    <a
+                      key={link.name}
+                      href={link.href}
+                      onClick={(e) => handleNavClick(e, link.href)}
+                      className="px-4 py-2.5 rounded-xl text-sm font-medium text-slate-200 hover:text-emerald-neon hover:bg-carbon-50/80 transition-all flex items-center justify-between"
+                    >
+                      <span className="flex items-center gap-2 font-mono">
+                        <span className="text-emerald-neon text-xs">#</span>
+                        {link.name}
+                      </span>
+                      <IconArrowRight className="w-3.5 h-3.5 text-slate-500" />
+                    </a>
+                  ))}
+                  
+                  <div className="pt-3 mt-1 border-t border-carbon-border/50 flex flex-col gap-2">
+                    <button
+                      onClick={() => {
+                        setMobileMenuOpen(false);
+                        onDownloadResume();
+                      }}
+                      className="w-full py-2.5 px-4 rounded-xl text-xs font-mono font-semibold text-emerald-300 border border-emerald-500/30 bg-carbon-50 flex items-center justify-center gap-2"
+                    >
+                      <IconDownload className="w-4 h-4 text-emerald-neon" />
+                      <span>Download Resume / CV</span>
+                    </button>
+                    <a
+                      href="#contact"
+                      onClick={(e) => handleNavClick(e, '#contact')}
+                      className="w-full py-2.5 px-4 rounded-xl text-xs font-bold text-center bg-gradient-to-r from-emerald-500 to-emerald-400 text-carbon font-mono"
+                    >
+                      Get In Touch // Internships
+                    </a>
+                  </div>
+                </div>
+              )}
+            </nav>
+          </div>
+        </header>
+      );
+    };
+
+    // --- CYBER TERMINAL & HUD COMPONENT ---
+    // Displays interactive code tabs, system status, and AIML stack tags
+    const CyberTerminal = ({ onTriggerShockwave }) => {
+      const [copied, setCopied] = useState(false);
+      const [activeTab, setActiveTab] = useState('profile.json');
+
+      const codeSnippets = {
+        'profile.json': `{
+  "developer": "Pranav P",
+  "status": "Open for Internships",
+  "education": {
+    "degree": "B.E. in AI & Machine Learning",
+    "year": "3rd Year (2022-2026)",
+    "college": "K S Institute of Technology"
+  },
+  "domains": ["Web Dev", "Applied AI", "GenAI"],
+  "gpa_status": "Strong Academic Standing",
+  "location": "Bengaluru, India"
+}`,
+        'skills.ts': `export const techStack = {
+  frontend: ["React", "TypeScript", "Tailwind CSS"],
+  ai_ml: ["Python", "PyTorch", "TensorFlow", "HuggingFace"],
+  backend: ["FastAPI", "Node.js", "PostgreSQL", "REST APIs"],
+  tools: ["Git", "Docker", "Linux", "Antigravity IDE"]
+};`,
+        'manifesto.sh': `#!/usr/bin/env bash
+echo "⚡ Architecting next-gen intelligent web systems."
+echo "🚀 Committed to clean code, UX excellence & AI innovation."
+echo "🟢 Ready to contribute on Day 1."`
+      };
+
+      const handleCopy = () => {
+        navigator.clipboard.writeText(codeSnippets[activeTab]);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      };
+
+      return (
+        <div className="relative group">
+          {/* Subtle Ambient Emerald Glow Behind Terminal */}
+          <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500/20 via-lime-neon/15 to-emerald-600/20 rounded-2xl blur-xl opacity-50 group-hover:opacity-80 transition duration-700 pointer-events-none" />
+
+          <div className="relative rounded-2xl cyber-card overflow-hidden shadow-2xl border border-carbon-border/90">
+            {/* Terminal Top Window Bar */}
+            <div className="flex items-center justify-between px-4 py-3 bg-carbon-50/90 border-b border-carbon-border/80">
+              <div className="flex items-center gap-2">
+                <span className="w-3 h-3 rounded-full bg-red-500/80 inline-block hover:opacity-100 cursor-pointer" title="Close" />
+                <span className="w-3 h-3 rounded-full bg-amber-500/80 inline-block hover:opacity-100 cursor-pointer" title="Minimize" />
+                <span className="w-3 h-3 rounded-full bg-emerald-neon inline-block hover:opacity-100 shadow-[0_0_8px_#10b981] cursor-pointer" title="Maximize" />
+                <span className="ml-2 font-mono text-[11px] text-slate-400 hidden sm:inline flex items-center gap-1.5">
+                  <IconTerminal className="w-3 h-3 text-emerald-neon" />
+                  <span>pranav@ksit-aiml:~/portfolio</span>
+                </span>
+              </div>
+
+              {/* Tab Selector */}
+              <div className="flex items-center gap-1">
+                {Object.keys(codeSnippets).map((tab) => (
+                  <button
+                    key={tab}
+                    onClick={() => setActiveTab(tab)}
+                    className={`px-2.5 py-1 rounded-md text-[11px] font-mono transition-all ${
+                      activeTab === tab
+                        ? 'bg-carbon-300 text-emerald-neon border border-emerald-500/30'
+                        : 'text-slate-400 hover:text-slate-200'
+                    }`}
+                  >
+                    {tab}
+                  </button>
+                ))}
+
+                <button
+                  onClick={handleCopy}
+                  className="ml-1 p-1.5 rounded-md text-slate-400 hover:text-emerald-neon hover:bg-carbon-300 transition-colors"
+                  title="Copy Code"
+                  aria-label="Copy code snippet"
+                >
+                  {copied ? <IconCheck className="w-3.5 h-3.5 text-emerald-neon" /> : <IconCopy className="w-3.5 h-3.5" />}
+                </button>
+              </div>
+            </div>
+
+            {/* Code Body */}
+            <div className="p-4 sm:p-5 font-mono text-xs sm:text-[13px] leading-relaxed overflow-x-auto bg-[#090d12]/95 text-slate-300">
+              <pre className="text-emerald-accent/90">
+                <code>{codeSnippets[activeTab]}</code>
+              </pre>
+            </div>
+
+            {/* Bottom HUD Bar */}
+            <div className="px-4 py-2.5 bg-carbon-50/80 border-t border-carbon-border/70 flex flex-wrap items-center justify-between text-[11px] font-mono text-slate-400 gap-2">
+              <div className="flex items-center gap-2">
+                <span className="inline-block w-2 h-2 rounded-full bg-emerald-neon animate-ping" />
+                <span className="text-emerald-300">SYSTEM: ACTIVE // 60 FPS</span>
+              </div>
+              <button
+                onClick={onTriggerShockwave}
+                className="hover:text-lime-neon flex items-center gap-1 text-slate-300 transition-colors cursor-pointer group/btn"
+              >
+                <IconSparkles className="w-3 h-3 text-lime-neon group-hover/btn:rotate-45 transition-transform" />
+                <span>Trigger Grid Pulse</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      );
+    };
+
+    // --- HERO INTRO SCREEN COMPONENT ---
+    const Hero = ({ onDownloadResume, onViewProjects }) => {
+      const [shockwaveKey, setShockwaveKey] = useState(0);
+
+      const triggerCanvasPulse = () => {
+        setShockwaveKey((k) => k + 1);
+        // Dispatch synthetic click to canvas for ripple shockwave
+        const event = new MouseEvent('click', {
+          clientX: window.innerWidth * 0.5,
+          clientY: window.innerHeight * 0.45,
+          bubbles: true
+        });
+        window.dispatchEvent(event);
+      };
+
+      const quickBadges = [
+        { label: '3rd Year AIML', icon: '🧠', detail: 'KSIT Bengaluru' },
+        { label: 'Modern Web & AI', icon: '⚡', detail: 'React · Tailwind · Python' },
+        { label: 'Summer 2025', icon: '🎯', detail: 'Available for Hire' }
+      ];
+
+      return (
+        <section
+          id="hero"
+          className="relative min-h-screen flex items-center justify-center pt-28 pb-16 sm:pb-24 lg:pt-32 lg:pb-32 overflow-hidden z-10"
+        >
+          {/* Subtle Ambient Radial Glow Overlay */}
+          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-emerald-500/10 rounded-full blur-[140px] pointer-events-none" />
+          <div className="absolute bottom-10 right-10 w-[350px] h-[300px] bg-lime-electric/10 rounded-full blur-[120px] pointer-events-none" />
+
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+              
+              {/* Left Column: Hero Content & Call to Actions */}
+              <div className="lg:col-span-7 flex flex-col items-start text-left">
+                
+                {/* 1. STATUS BADGE: Animated blinking radar pill */}
+                <div
+                  id="status-badge"
+                  className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-emerald-950/40 border border-emerald-500/30 text-emerald-300 font-mono text-xs sm:text-sm tracking-wide backdrop-blur-md shadow-[0_0_20px_rgba(16,185,129,0.15)] hover:border-emerald-400 hover:shadow-[0_0_25px_rgba(16,185,129,0.3)] transition-all cursor-default group"
+                >
+                  <div className="relative flex items-center justify-center w-3 h-3">
+                    <span className="absolute w-full h-full rounded-full bg-emerald-neon opacity-75 animate-radar-pulse" />
+                    <span className="relative w-2 h-2 rounded-full bg-emerald-neon shadow-[0_0_8px_#10b981]" />
+                  </div>
+                  <span className="font-semibold text-emerald-light">Student Developer</span>
+                  <span className="text-emerald-500/50 font-bold">//</span>
+                  <span className="text-slate-200 group-hover:text-white transition-colors">
+                    Open for Internships
+                  </span>
+                </div>
+
+                {/* 2. MAIN HEADLINE */}
+                <h1
+                  id="main-headline"
+                  className="mt-6 text-3xl sm:text-5xl md:text-6xl lg:text-[62px] font-extrabold tracking-tight text-white leading-[1.12]"
+                >
+                  Hey, I am{' '}
+                  <span className="relative inline-block">
+                    <span className="bg-gradient-to-r from-emerald-400 via-emerald-300 to-lime-neon bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(16,185,129,0.4)]">
+                      Pranav P
+                    </span>
+                    {/* Subtle underline glow */}
+                    <span className="absolute -bottom-1 left-0 right-0 h-[3px] bg-gradient-to-r from-emerald-500 via-lime-neon to-transparent rounded-full opacity-70" />
+                  </span>{' '}
+                  — <br className="hidden sm:inline" />
+                  <span className="text-slate-100 font-bold">
+                    Building the Future of Tech.
+                  </span>
+                </h1>
+
+                {/* 3. STUDENT BIO */}
+                <p
+                  id="student-bio"
+                  className="mt-6 text-base sm:text-lg md:text-xl text-slate-300/90 font-normal leading-relaxed max-w-2xl"
+                >
+                  <span className="text-emerald-light font-semibold">3rd year AIML student</span> from{' '}
+                  <span className="text-white font-semibold underline decoration-emerald-500/40 underline-offset-4">
+                    K S Institute of Technology
+                  </span>
+                  , passionate about web development, AI, and building real-world projects that solve meaningful problems.
+                </p>
+
+                {/* 4. ACTION BUTTONS */}
+                <div
+                  id="hero-action-buttons"
+                  className="mt-8 sm:mt-10 flex flex-wrap items-center gap-4 w-full sm:w-auto"
+                >
+                  {/* Glowing Emerald Primary Button */}
+                  <button
+                    id="btn-view-projects"
+                    onClick={onViewProjects}
+                    className="relative group overflow-hidden w-full sm:w-auto px-7 py-4 rounded-xl font-mono text-sm font-bold text-carbon bg-gradient-to-r from-emerald-500 via-emerald-400 to-lime-neon shadow-[0_0_25px_rgba(16,185,129,0.45)] hover:shadow-[0_0_40px_rgba(16,185,129,0.7)] hover:-translate-y-1 active:translate-y-0 transition-all duration-300 flex items-center justify-center gap-3 cursor-pointer"
+                  >
+                    {/* Button internal shimmer highlight */}
+                    <span className="absolute top-0 -left-full w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent group-hover:left-full transition-all duration-1000 ease-out" />
+                    <span>View My Projects</span>
+                    <IconArrowRight className="w-4 h-4 text-carbon group-hover:translate-x-1.5 transition-transform duration-300" />
+                  </button>
+
+                  {/* Outline Secondary Button */}
+                  <button
+                    id="btn-download-resume"
+                    onClick={onDownloadResume}
+                    className="relative group w-full sm:w-auto px-7 py-4 rounded-xl font-mono text-sm font-semibold text-emerald-300 border border-emerald-500/40 hover:border-emerald-300 bg-carbon-50/70 hover:bg-emerald-500/10 backdrop-blur-sm shadow-[0_0_15px_rgba(16,185,129,0.1)] hover:shadow-[0_0_25px_rgba(16,185,129,0.25)] hover:-translate-y-1 active:translate-y-0 transition-all duration-300 flex items-center justify-center gap-3 cursor-pointer"
+                  >
+                    <IconDownload className="w-4 h-4 text-emerald-neon group-hover:-translate-y-0.5 transition-transform duration-300" />
+                    <span>Download Resume / CV</span>
+                  </button>
+                </div>
+
+                {/* 5. QUICK METRICS / HIGHLIGHTS STRIP */}
+                <div className="mt-12 pt-8 border-t border-carbon-border/70 w-full grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  {quickBadges.map((badge, idx) => (
+                    <div
+                      key={idx}
+                      className="p-3 rounded-xl bg-carbon-50/50 border border-carbon-border/50 hover:border-emerald-500/30 transition-all flex items-center gap-3 group"
+                    >
+                      <span className="text-xl p-2 rounded-lg bg-carbon-100 border border-carbon-border group-hover:scale-110 transition-transform">
+                        {badge.icon}
+                      </span>
+                      <div>
+                        <div className="text-xs font-mono font-bold text-slate-100 group-hover:text-emerald-neon transition-colors">
+                          {badge.label}
+                        </div>
+                        <div className="text-[11px] text-slate-400 font-mono">
+                          {badge.detail}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+              </div>
+
+              {/* Right Column: Interactive Cyber Terminal & Real-Time Stats */}
+              <div className="lg:col-span-5 w-full mt-6 lg:mt-0">
+                <CyberTerminal onTriggerShockwave={triggerCanvasPulse} />
+
+                {/* Quick Hint for Interactive Canvas Grid */}
+                <div className="mt-4 flex items-center justify-between text-xs font-mono text-slate-400 px-2">
+                  <span className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-lime-neon animate-pulse" />
+                    <span>Hover or click grid to ripple</span>
+                  </span>
+                  <span className="text-emerald-400/80">Interactive 3D Matrix</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+      );
+    };
+
+    // --- PREVIEW SECTIONS: ABOUT, PROJECTS, SKILLS, CAMPUS LIFE, CONTACT ---
+    // Provides full smooth-scroll targets so all navbar buttons work seamlessly
+    const SectionContainer = ({ id, badge, title, subtitle, children }) => (
+      <section id={id} className="relative py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto z-10">
+        <div className="flex flex-col items-center text-center mb-12">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/40 border border-emerald-500/30 text-emerald-light font-mono text-xs">
+            <span className="text-lime-neon">#</span> {badge}
+          </div>
+          <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+            {title}
+          </h2>
+          <p className="mt-3 text-slate-400 max-w-xl text-sm sm:text-base font-mono">
+            {subtitle}
+          </p>
+        </div>
+        {children}
+      </section>
+    );
+
+    // --- 3D PERSPECTIVE TILT PROJECT CARD ---
+    const ProjectTiltCard = ({ project, onAction }) => {
+      const cardRef = useRef(null);
+      const [tilt, setTilt] = useState({ x: 0, y: 0 });
+      const [isHovered, setIsHovered] = useState(false);
+      const [shine, setShine] = useState({ x: 0, y: 0 });
+
+      const handleMouseMove = (e) => {
+        if (!cardRef.current) return;
+        const rect = cardRef.current.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const normX = x / rect.width;
+        const normY = y / rect.height;
+
+        // Subtle 3D tilt: -14 to +14 deg
+        const rotateX = (0.5 - normY) * 16;
+        const rotateY = (normX - 0.5) * 16;
+
+        setTilt({ x: rotateX, y: rotateY });
+        setShine({ x, y });
+      };
+
+      const handleMouseEnter = () => setIsHovered(true);
+      const handleMouseLeave = () => {
+        setIsHovered(false);
+        setTilt({ x: 0, y: 0 });
+      };
+
+      return (
+        <div style={{ perspective: '1000px' }} className="w-full h-full">
+          <div
+            ref={cardRef}
+            onMouseMove={handleMouseMove}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            style={{
+              transform: isHovered
+                ? `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) translateY(-6px) scale3d(1.02, 1.02, 1.02)`
+                : 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px) scale3d(1, 1, 1)',
+              transition: isHovered
+                ? 'transform 0.12s ease-out, box-shadow 0.3s ease, border-color 0.3s ease'
+                : 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease, border-color 0.3s ease'
+            }}
+            className={`relative rounded-2xl bg-carbon-100/80 backdrop-blur-md border overflow-hidden flex flex-col justify-between h-full group ${
+              isHovered
+                ? 'border-emerald-500/50 shadow-[0_16px_40px_-10px_rgba(16,185,129,0.32),0_0_20px_rgba(16,185,129,0.18)]'
+                : 'border-emerald-500/20 shadow-[0_8px_24px_rgba(0,0,0,0.4)]'
+            }`}
+          >
+            {/* Sleek radial cursor shine reflection */}
+            <div
+              className="pointer-events-none absolute inset-0 transition-opacity duration-300 z-10"
+              style={{
+                opacity: isHovered ? 1 : 0,
+                background: `radial-gradient(380px circle at ${shine.x}px ${shine.y}px, rgba(16, 185, 129, 0.18), transparent 70%)`
+              }}
+            />
+
+            {/* Diagonal specular highlight sweep */}
+            <div
+              className="pointer-events-none absolute -inset-full bg-gradient-to-tr from-transparent via-emerald-400/10 to-transparent transition-transform duration-1000 ease-out z-10"
+              style={{
+                transform: isHovered ? 'translate(50%, 50%) rotate(25deg)' : 'translate(-50%, -50%) rotate(25deg)'
+              }}
+            />
+
+            {/* Top Hairline Accent */}
+            <div className="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-emerald-500/40 to-transparent pointer-events-none" />
+
+            {/* Card Body */}
+            <div className="p-6 sm:p-7 relative z-20 flex-1 flex flex-col">
+              {/* Header Bar: Category Tag & Status Indicator */}
+              <div className="flex items-center justify-between text-xs font-mono mb-4">
+                <span className="px-3 py-1 rounded-full bg-emerald-950/50 border border-emerald-500/30 text-emerald-300 font-semibold flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-neon animate-pulse" />
+                  {project.category}
+                </span>
+                <span className="text-[11px] text-slate-400 font-mono">
+                  {project.status}
+                </span>
+              </div>
+
+              {/* Graphical Cyber Wireframe Preview Area */}
+              <div className="w-full h-36 rounded-xl bg-[#090d12]/90 border border-carbon-border mb-5 relative overflow-hidden flex items-center justify-center group-hover:border-emerald-500/40 transition-colors">
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(16,185,129,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(16,185,129,0.05)_1px,transparent_1px)] bg-[size:16px_16px]" />
+                <div className="relative z-10 flex flex-col items-center">
+                  <div className="w-12 h-12 rounded-xl bg-carbon-50 border border-emerald-500/40 flex items-center justify-center text-2xl shadow-[0_0_15px_rgba(16,185,129,0.25)] group-hover:scale-110 group-hover:shadow-[0_0_25px_rgba(16,185,129,0.45)] transition-all">
+                    {project.icon}
+                  </div>
+                  <span className="mt-2 text-[10px] font-mono text-emerald-accent/80 tracking-wider uppercase">
+                    {project.schematicLabel}
+                  </span>
+                </div>
+                {/* Glowing Corner Accents */}
+                <span className="absolute top-2 left-2 w-2 h-2 border-t-2 border-l-2 border-emerald-500/60" />
+                <span className="absolute top-2 right-2 w-2 h-2 border-t-2 border-r-2 border-emerald-500/60" />
+                <span className="absolute bottom-2 left-2 w-2 h-2 border-b-2 border-l-2 border-emerald-500/60" />
+                <span className="absolute bottom-2 right-2 w-2 h-2 border-b-2 border-r-2 border-emerald-500/60" />
+              </div>
+
+              {/* Project Title */}
+              <h3 className="text-xl font-bold text-white group-hover:text-emerald-light transition-colors tracking-tight flex items-center justify-between">
+                <span>{project.title}</span>
+                <span className="text-emerald-neon text-sm opacity-0 group-hover:opacity-100 transition-opacity">↗</span>
+              </h3>
+
+              {/* 2-Sentence Project Description */}
+              <p className="mt-2.5 text-sm text-slate-300/90 leading-relaxed font-sans flex-1">
+                {project.description}
+              </p>
+
+              {/* Tech Badges */}
+              <div className="mt-5 pt-4 border-t border-carbon-border/80 flex flex-wrap gap-2">
+                {project.techBadges.map((badge, idx) => (
+                  <span
+                    key={idx}
+                    className="px-2.5 py-1 rounded-md text-[11px] font-mono font-medium text-emerald-300 bg-emerald-950/30 border border-emerald-500/25 group-hover:border-emerald-500/40 transition-colors"
+                  >
+                    {badge}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Interactive Action Buttons */}
+            <div className="p-6 pt-0 relative z-20 grid grid-cols-2 gap-3">
+              <button
+                onClick={() => onAction && onAction(project, 'demo')}
+                className="w-full py-2.5 px-3.5 rounded-xl font-mono text-xs font-bold text-carbon bg-gradient-to-r from-emerald-500 to-emerald-400 hover:from-emerald-400 hover:to-lime-neon shadow-[0_0_15px_rgba(16,185,129,0.35)] hover:shadow-[0_0_25px_rgba(16,185,129,0.6)] hover:-translate-y-0.5 active:translate-y-0 transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+              >
+                <span>Live Demo</span>
+                <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+              </button>
+
+              <button
+                onClick={() => onAction && onAction(project, 'github')}
+                className="w-full py-2.5 px-3.5 rounded-xl font-mono text-xs font-semibold text-slate-200 border border-emerald-500/30 hover:border-emerald-400 bg-carbon-50/60 hover:bg-emerald-500/10 hover:text-emerald-300 hover:-translate-y-0.5 active:translate-y-0 transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+              >
+                <svg className="w-3.5 h-3.5 text-emerald-neon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                </svg>
+                <span>GitHub</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      );
+    };
+
+    // --- FEATURED PROJECTS SHOWCASE COMPONENT ---
+    const FeaturedProjects = ({ onAction }) => {
+      const [activeFilter, setActiveFilter] = useState('All');
+
+      const filterTabs = ['All', 'Web Apps', 'AI / ML', 'Mini-Projects'];
+
+      const projectsData = [
+        {
+          id: 'proj-1',
+          title: 'Campus Event Finder',
+          category: 'Web Apps',
+          subCategories: ['Web Apps', 'Mini-Projects'],
+          status: '🟢 Live // University Beta',
+          schematicLabel: 'Event Sync Engine // Realtime',
+          icon: '🎪',
+          description:
+            'A real-time centralized campus portal that aggregates hackathons, tech talks, and cultural fests for university students. Features instant RSVP notifications and automated Google Calendar sync to keep everyone connected.',
+          techBadges: ['React', 'Firebase', 'Tailwind', 'Cloud Functions'],
+          demoUrl: 'https://campus-events-ksit.example.com',
+          githubUrl: 'https://github.com/pranav-p/campus-event-finder'
+        },
+        {
+          id: 'proj-2',
+          title: 'Smart Attendance Tracker',
+          category: 'AI / ML',
+          subCategories: ['AI / ML', 'Mini-Projects'],
+          status: '⚡ Edge Inference // 99.2%',
+          schematicLabel: 'Neural Face Vector Pipeline',
+          icon: '👁️',
+          description:
+            'An automated facial recognition system built for college classrooms to eliminate manual roll calls. Employs lightweight edge computer vision pipelines to record student timestamps in sub-second latency.',
+          techBadges: ['Python', 'OpenCV', 'FastAPI', 'YOLOv8'],
+          demoUrl: 'https://smart-attendance-demo.example.com',
+          githubUrl: 'https://github.com/pranav-p/smart-attendance-tracker'
+        },
+        {
+          id: 'proj-3',
+          title: 'Student Notes Marketplace',
+          category: 'Web Apps',
+          subCategories: ['Web Apps', 'Mini-Projects'],
+          status: '🚀 Peer Network // Active',
+          schematicLabel: 'Decentralized P2P Document Vault',
+          icon: '📚',
+          description:
+            'A collaborative peer-to-peer study repository for verified collegiate lecture notes and exam guides. Integrated with instant document previews and a student karma rating system to reward top contributors.',
+          techBadges: ['Tailwind', 'Node.js', 'Express', 'MongoDB'],
+          demoUrl: 'https://student-notes-hub.example.com',
+          githubUrl: 'https://github.com/pranav-p/student-notes-marketplace'
+        }
+      ];
+
+      const filteredProjects = useMemo(() => {
+        if (activeFilter === 'All') return projectsData;
+        return projectsData.filter((p) =>
+          p.subCategories.includes(activeFilter) || p.category === activeFilter
+        );
+      }, [activeFilter]);
+
+      return (
+        <section
+          id="projects"
+          className="relative py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto z-10 scroll-mt-24"
+        >
+          {/* Section Header */}
+          <div className="flex flex-col items-center text-center mb-10">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-950/40 border border-emerald-500/30 text-emerald-light font-mono text-xs">
+              <span className="w-2 h-2 rounded-full bg-emerald-neon animate-pulse" />
+              <span>PORTFOLIO // SELECTED WORKS</span>
+            </div>
+
+            <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight">
+              Featured Projects
+            </h2>
+
+            <p className="mt-3 text-slate-400 max-w-2xl text-sm sm:text-base font-body leading-relaxed">
+              Production systems, applied machine learning models, and interactive campus utilities built for real impact.
+            </p>
+
+            {/* Filter Pill Row */}
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-2 sm:gap-3 p-1.5 rounded-2xl bg-carbon-100/70 border border-carbon-border backdrop-blur-md">
+              {filterTabs.map((tab) => {
+                const isActive = activeFilter === tab;
+                const count =
+                  tab === 'All'
+                    ? projectsData.length
+                    : projectsData.filter((p) => p.subCategories.includes(tab)).length;
+
+                return (
+                  <button
+                    key={tab}
+                    onClick={() => setActiveFilter(tab)}
+                    className={`relative px-4 py-2 rounded-xl text-xs font-mono font-semibold transition-all duration-300 flex items-center gap-2 cursor-pointer ${
+                      isActive
+                        ? 'bg-gradient-to-r from-emerald-500 to-emerald-400 text-carbon font-bold shadow-[0_0_20px_rgba(16,185,129,0.45)]'
+                        : 'text-slate-300 hover:text-emerald-neon hover:bg-carbon-50/80'
+                    }`}
+                  >
+                    <span>{tab}</span>
+                    <span
+                      className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${
+                        isActive
+                          ? 'bg-carbon/25 text-carbon'
+                          : 'bg-carbon-border text-slate-400'
+                      }`}
+                    >
+                      {count}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Responsive 3-Column Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch">
+            {filteredProjects.map((project) => (
+              <div key={project.id} className="transition-all duration-300">
+                <ProjectTiltCard project={project} onAction={onAction} />
+              </div>
+            ))}
+          </div>
+        </section>
+      );
+    };
+
+    const AboutPreview = () => (
+      <div className="cyber-card p-8 rounded-2xl max-w-4xl mx-auto border border-carbon-border/80">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+          <div className="flex flex-col items-center text-center p-4 bg-carbon-50 rounded-xl border border-carbon-border">
+            <div className="w-20 h-20 rounded-2xl bg-gradient-to-tr from-emerald-500 to-lime-neon flex items-center justify-center text-2xl font-bold text-carbon font-mono shadow-[0_0_20px_rgba(16,185,129,0.3)]">
+              PP
+            </div>
+            <div className="mt-3 font-bold text-white">Pranav P</div>
+            <div className="text-xs font-mono text-emerald-neon">AIML Undergrad @ KSIT</div>
+          </div>
+          <div className="md:col-span-2 text-slate-300 space-y-3 text-sm leading-relaxed">
+            <p>
+              I am an Artificial Intelligence & Machine Learning engineering student at <strong>K S Institute of Technology (Bengaluru)</strong>. My passion lies at the intersection of modern frontend architectures and applied deep learning.
+            </p>
+            <p>
+              Whether it is tuning neural networks, crafting fluid glassmorphic UI/UX, or deploying resilient microservices, I take pride in engineering end-to-end software that is both performant and beautiful.
+            </p>
+            <div className="flex flex-wrap gap-3 pt-2 font-mono text-xs">
+              <span className="text-emerald-light">📍 Bengaluru, Karnataka</span>
+              <span className="text-emerald-light">🎓 Class of 2026</span>
+              <span className="text-emerald-light">⚡ 15+ Projects Completed</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+
+    // --- INTERACTIVE TECH STACK & SKILLS COMPONENT ---
+    const TechStackSkills = () => {
+      // Official & Crisp SVG Tech Icons
+      const icons = {
+        cpp: (
+          <svg className="w-4 h-4 text-[#00599C]" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M22.42 10.37a2.53 2.53 0 0 0-.2-.59l-2-3.46a2.6 2.6 0 0 0-2.25-1.32H14.1a2.58 2.58 0 0 0-2.24 1.32l-2 3.46a2.55 2.55 0 0 0 0 2.6l2 3.46a2.6 2.6 0 0 0 2.24 1.32h3.87a2.6 2.6 0 0 0 2.25-1.32l2-3.46a2.55 2.55 0 0 0 .2-.6zm-6.28 2.87h-1.42v1.41h-.96v-1.41h-1.42v-.96h1.42v-1.41h.96v1.41h1.42zm4.56 0h-1.42v1.41h-.96v-1.41h-1.42v-.96h1.42v-1.41h.96v1.41h1.42zM11.9 8.5H9.6a4.4 4.4 0 0 0-3.8 2.2 4.4 4.4 0 0 0 0 4.4 4.4 4.4 0 0 0 3.8 2.2h2.3a4.3 4.3 0 0 0 3.3-1.5l-1.6-1.3a2.3 2.3 0 0 1-1.7.8H9.6a2.4 2.4 0 0 1-2.1-1.2 2.4 2.4 0 0 1 0-2.4A2.4 2.4 0 0 1 9.6 10.5h2.3a2.3 2.3 0 0 1 1.7.8l1.6-1.3A4.3 4.3 0 0 0 11.9 8.5z" />
+          </svg>
+        ),
+        python: (
+          <svg className="w-4 h-4 text-[#3776AB]" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M11.91 0c-3.14 0-5.07.44-5.07 2.11v1.89h5.18v.57H4.49C1.94 4.57 0 6.13 0 8.76c0 2.76 2.22 4.3 4.63 4.3h1.27v-1.78c0-1.89 1.63-3.45 3.52-3.45h5.18V5.07C14.6 2.3 13.06 0 11.91 0zm-2.02 1.34a.9.9 0 1 1 0 1.8.9.9 0 0 1 0-1.8zM19.37 6.64h-1.27v1.78c0 1.89-1.63 3.45-3.52 3.45H9.4v2.76c0 2.77 1.54 5.07 5.2 5.07 3.14 0 5.07-.44 5.07-2.11v-1.89H14.5v-.57h7.52c2.55 0 4.49-1.56 4.49-4.19 0-2.76-2.22-4.3-4.63-4.3h-2.51zm-5.26 14.22a.9.9 0 1 1 0-1.8.9.9 0 0 1 0 1.8z" />
+          </svg>
+        ),
+        javascript: (
+          <svg className="w-4 h-4 text-[#F7DF1E]" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M0 0h24v24H0V0zm22.03 17.58c-.1-.7-.4-1.27-.89-1.68-.49-.41-1.12-.66-1.92-.81l-1.02-.19c-.43-.09-.76-.2-.99-.34-.23-.15-.35-.36-.35-.63 0-.29.13-.53.4-.7.27-.18.63-.26 1.07-.26.41 0 .76.08 1.05.25.29.17.48.42.57.77l1.7-.68c-.23-.62-.64-1.12-1.24-1.48-.6-.36-1.33-.54-2.18-.54-.92 0-1.7.22-2.32.65-.62.43-.94 1.02-.94 1.77 0 .61.2 1.1.6 1.48.4.38.99.64 1.75.79l1.04.22c.5.11.88.25 1.13.43.25.17.38.43.38.76 0 .34-.14.62-.43.83-.28.21-.69.31-1.22.31-.58 0-1.04-.12-1.39-.37-.35-.25-.56-.63-.64-1.15l-1.78.52c.18.84.61 1.5 1.3 1.96.69.46 1.57.69 2.63.69 1.07 0 1.95-.23 2.63-.7.68-.47 1.03-1.12 1.03-1.97 0-.01.03-.31.06-.47zm-8.81-.39c0-.49-.07-.98-.22-1.46h-1.87c.09.28.14.56.14.85 0 .37-.08.71-.24 1.02-.16.3-.39.53-.7.69-.3.16-.67.24-1.1.24-.46 0-.85-.09-1.16-.27-.31-.18-.54-.45-.69-.81-.15-.36-.23-.81-.23-1.35V9.67H5.2v6.62c0 .91.17 1.68.51 2.31.34.63.84 1.1 1.5 1.42.66.32 1.46.48 2.41.48.96 0 1.77-.18 2.42-.53.65-.35 1.13-.86 1.44-1.52.3-.67.46-1.46.46-2.39v-.38z" />
+          </svg>
+        ),
+        java: (
+          <svg className="w-4 h-4 text-[#EA2D2E]" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M8.85 16.34c-.87-.04-1.63.35-1.9.99-.34.82.26 1.71 1.34 2 .99.27 2.06-.05 2.4-.87.35-.83-.24-1.73-1.32-2.03-.18-.05-.36-.08-.52-.09zm7.04-3.52c-.65.25-.8 1.17-.33 2.04.48.87 1.39 1.36 2.04 1.11.65-.25.8-1.17.32-2.04-.47-.87-1.38-1.36-2.03-1.11zm-5.77-5.71c.78.36 1.25.99 1.06 1.4-.19.41-1 .45-1.79.09-.78-.36-1.25-.99-1.06-1.4.19-.41 1.01-.45 1.79-.09zm7.54 11.23c-1.3 1.36-4.54 1.83-7.53 1.09-3.23-.8-5.35-2.73-4.73-4.32.32-.82 1.17-1.37 2.34-1.61-.41-.47-.64-1.01-.64-1.58 0-1.89 2.5-3.37 5.75-3.42 2.37-.04 4.41.74 5.25 1.95.84 1.2.56 2.68-.69 3.82 2.31-.22 4.14.71 4.54 2.11.45 1.54-.78 3.19-2.77 4.04-1.24.53-2.67.75-4.04.66.42-.39.77-.85 1.04-1.36.98-.07 1.94-.37 2.68-.89.87-.62 1.07-1.38.54-1.89-.55-.53-1.85-.68-3.32-.4-.28.05-.56.12-.84.2.35-.49.56-1.04.62-1.61 1.55-.4 2.58-1.29 2.46-2.2-.12-.89-1.23-1.49-2.71-1.49-1.48 0-2.6.59-2.72 1.48-.07.56.29 1.13.97 1.56-.23.47-.36 1-.36 1.56 0 1.24.69 2.33 1.8 3.03-.5.06-1.01.07-1.52.03-2.33-.21-4.24-1.1-4.53-2.11-.3-1.03 1.12-2.18 3.34-2.73.54-.14 1.14-.23 1.75-.29-.39-.51-.62-1.12-.62-1.78 0-1.92 1.93-3.48 4.32-3.48.65 0 1.26.11 1.81.33-.31-.47-.73-.87-1.25-1.16-.76-.43-1.7-.58-2.65-.45.47-.37 1.06-.61 1.71-.69 1.63-.19 3.23.41 4.19 1.56.88 1.06 1.08 2.49.54 3.9-.13.34-.3.67-.52.98.67.57 1.08 1.36 1.08 2.22 0 1.45-1.19 2.69-2.97 3.2z" />
+          </svg>
+        ),
+        typescript: (
+          <svg className="w-4 h-4 text-[#3178C6]" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M1.5 0h21A1.5 1.5 0 0 1 24 1.5v21a1.5 1.5 0 0 1-1.5 1.5h-21A1.5 1.5 0 0 1 0 22.5v-21A1.5 1.5 0 0 1 1.5 0zm10.28 13.91h-2.9v7.05h-2.2v-7.05H3.72V12h8.06v1.91zm10.74 3.05c-.08-.75-.4-1.36-.95-1.8-.55-.44-1.25-.7-2.14-.86l-1.14-.2c-.48-.1-.85-.22-1.1-.38-.26-.16-.39-.39-.39-.68 0-.32.14-.57.44-.76.3-.19.7-.28 1.2-.28.46 0 .85.09 1.18.28.33.18.54.45.64.82l1.9-.73c-.26-.67-.71-1.2-1.39-1.59-.67-.39-1.49-.58-2.45-.58-1.03 0-1.9.24-2.6.7-.7.46-1.05 1.1-1.05 1.9 0 .65.23 1.18.67 1.59.45.41 1.11.69 1.96.85l1.16.24c.56.12.98.27 1.26.46.28.18.42.46.42.82 0 .37-.16.66-.48.88-.32.22-.77.33-1.37.33-.65 0-1.16-.13-1.55-.4-.39-.27-.63-.68-.72-1.23l-2 .55c.2 1.05.74 1.83 1.55 2.33.81.5 1.83.75 3.05.75 1.2 0 2.19-.25 2.95-.75.76-.5 1.15-1.2 1.15-2.11 0-.01.03-.33.06-.5z" />
+          </svg>
+        ),
+        sql: (
+          <svg className="w-4 h-4 text-[#336791]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+            <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+            <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+          </svg>
+        ),
+        react: (
+          <svg className="w-4 h-4 text-[#61DAFB]" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm0-2a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0-7C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm0 21.6c-5.3 0-9.6-4.3-9.6-9.6S6.7 2.4 12 2.4s9.6 4.3 9.6 9.6-4.3 9.6-9.6 9.6z" opacity="0.2"/>
+            <path d="M12 14.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
+            <path d="M22.82 9.53c-.3-1.8-1.57-3.32-3.48-4.14-2.31-.99-5.18-.8-7.34.46-2.16-1.26-5.03-1.45-7.34-.46-1.91.82-3.18 2.34-3.48 4.14-.32 1.93.38 3.91 1.9 5.38-1.52 1.47-2.22 3.45-1.9 5.38.3 1.8 1.57 3.32 3.48 4.14 1.13.48 2.37.7 3.6.7 1.3 0 2.59-.25 3.74-.8 1.15.55 2.44.8 3.74.8 1.23 0 2.47-.22 3.6-.7 1.91-.82 3.18-2.34 3.48-4.14.32-1.93-.38-3.91-1.9-5.38 1.52-1.47 2.22-3.45 1.9-5.38zm-1.89 8.79c-.19 1.16-1.03 2.15-2.27 2.68-1.77.76-4.04.53-6.13-.58-.17-.09-.34-.17-.53-.25.19-.08.36-.16.53-.25 2.09-1.11 4.36-1.34 6.13-.58 1.24.53 2.08 1.52 2.27 2.68v.3zm-17.86 0c.19-1.16 1.03-2.15 2.27-2.68 1.77-.76 4.04-.53 6.13.58.17.09.34.17.53.25-.19.08-.36.16-.53.25-2.09 1.11-4.36 1.34-6.13.58-1.24-.53-2.08-1.52-2.27-2.68v-.3z" opacity="0.8"/>
+          </svg>
+        ),
+        tailwind: (
+          <svg className="w-4 h-4 text-[#38BDF8]" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.027 12 18.001 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.337 6.182 14.976 4.8 12.001 4.8zm-6 7.2c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624 1.177 1.194 2.538 2.576 5.512 2.576 3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C10.336 13.382 8.975 12 6.001 12z" />
+          </svg>
+        ),
+        nodejs: (
+          <svg className="w-4 h-4 text-[#68A063]" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0L1.6 6v12L12 24l10.4-6V6L12 0zm-1.1 19.3l-5.6-3.2V9.9l5.6 3.2v6.2zm1.1-7.5l-5.6-3.2 5.6-3.2 5.6 3.2-5.6 3.2zm6.7 4.3l-5.6 3.2v-6.2l5.6-3.2v6.2z"/>
+          </svg>
+        ),
+        git: (
+          <svg className="w-4 h-4 text-[#F05032]" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M23.546 10.93L13.067.452a1.498 1.498 0 0 0-2.122 0L8.87 2.527l2.943 2.943a1.776 1.776 0 0 1 2.247 2.247l2.833 2.833a1.776 1.776 0 0 1 1.745 2.973 1.775 1.775 0 0 1-2.973-1.745L12.98 8.945v6.52a1.776 1.776 0 0 1 .494 1.258 1.777 1.777 0 1 1-3.554 0 1.776 1.776 0 0 1 .927-1.554V8.583a1.776 1.776 0 0 1-.927-1.554c0-.396.13-.762.348-1.06L7.336 3.036.454 9.918a1.498 1.498 0 0 0 0 2.122l10.48 10.479a1.498 1.498 0 0 0 2.12 0l10.49-10.48a1.5 1.5 0 0 0 .002-2.11z"/>
+          </svg>
+        ),
+        fastapi: (
+          <svg className="w-4 h-4 text-[#009688]" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0a12 12 0 1 0 12 12A12 12 0 0 0 12 0zm-.75 4.5h3.75l-4.5 7.5h3.75l-6 7.5 1.5-6H6.75l4.5-9z"/>
+          </svg>
+        ),
+        pytorch: (
+          <svg className="w-4 h-4 text-[#EE4C2C]" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M13.2 2.1l-.8.8a6.3 6.3 0 0 1 4.5 6.1c0 3.5-2.8 6.3-6.3 6.3S4.3 12.5 4.3 9c0-2.8 1.8-5.2 4.4-6l-.3-1.1C5.3 2.9 3.1 5.7 3.1 9c0 4.1 3.4 7.5 7.5 7.5s7.5-3.4 7.5-7.5c0-2.8-1.5-5.3-3.9-6.5l-1-.4zm.8 4.2a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+          </svg>
+        ),
+        docker: (
+          <svg className="w-4 h-4 text-[#2496ED]" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M13.98 11.08h-2.1v2.1h2.1v-2.1zm-2.8 0h-2.1v2.1h2.1v-2.1zm-2.8 0h-2.1v2.1h2.1v-2.1zm8.4 0h-2.1v2.1h2.1v-2.1zm-2.8-2.8h-2.1v2.1h2.1V8.28zm-2.8 0h-2.1v2.1h2.1V8.28zm5.6 0h-2.1v2.1h2.1V8.28zm-2.8-2.8h-2.1v2.1h2.1V5.48zm12.24 7.7c-.5-.35-1.58-.45-2.38-.28-.15-.9-1.04-1.85-2.22-1.85-.35 0-.7.09-1.01.25V11H.76c-.4 1.34-.61 2.76-.61 4.2 0 4.7 3.6 8.5 8.1 8.5 5.5 0 9.8-3.6 11.2-8.6.6.1 1.2.04 1.7-.15.8-.3 1.5-.9 1.8-1.6-.3.1-.7.15-1.1.15z"/>
+          </svg>
+        ),
+        linux: (
+          <svg className="w-4 h-4 text-[#FCC624]" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12.01 0c-3.1 0-4.6 2.4-4.6 5.8 0 1.2.2 2.5.6 3.6-1.1 1-2.1 2.4-2.1 4.1 0 1.5.8 2.8 1.9 3.5-.2.5-.3 1.1-.3 1.7 0 2.9 2.3 5.3 5.3 5.3s5.3-2.4 5.3-5.3c0-.6-.1-1.2-.3-1.7 1.1-.7 1.9-2 1.9-3.5 0-1.7-1-3.1-2.1-4.1.4-1.1.6-2.4.6-3.6 0-3.4-1.5-5.8-4.6-5.8zm-.8 13.9c.7 0 1.2.5 1.2 1.2s-.5 1.2-1.2 1.2-1.2-.5-1.2-1.2.5-1.2 1.2-1.2zm3.3 0c.7 0 1.2.5 1.2 1.2s-.5 1.2-1.2 1.2-1.2-.5-1.2-1.2.5-1.2 1.2-1.2z"/>
+          </svg>
+        ),
+        dsa: (
+          <svg className="w-4 h-4 text-emerald-neon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="12" cy="5" r="3"></circle>
+            <circle cx="6" cy="19" r="3"></circle>
+            <circle cx="18" cy="19" r="3"></circle>
+            <path d="m9 7.5 4.5 8"></path>
+            <path d="m15 7.5-4.5 8"></path>
+          </svg>
+        ),
+        algorithms: (
+          <svg className="w-4 h-4 text-lime-neon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <rect width="6" height="6" x="3" y="3" rx="1"></rect>
+            <rect width="6" height="6" x="15" y="3" rx="1"></rect>
+            <rect width="6" height="6" x="9" y="15" rx="1"></rect>
+            <path d="M6 9v3a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V9"></path>
+            <path d="M12 13v2"></path>
+          </svg>
+        ),
+        oop: (
+          <svg className="w-4 h-4 text-emerald-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="m21 16-9 5-9-5V8l9-5 9 5v8Z"></path>
+            <path d="m3.27 6.96 8.73 4.97 8.73-4.97"></path>
+            <path d="M12 22.08V12"></path>
+          </svg>
+        ),
+        dbms: (
+          <svg className="w-4 h-4 text-emerald-neon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+            <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+            <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+          </svg>
+        ),
+        os: (
+          <svg className="w-4 h-4 text-lime-bright" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <rect width="16" height="16" x="4" y="4" rx="2"></rect>
+            <rect width="6" height="6" x="9" y="9" rx="1"></rect>
+            <path d="M15 2v2"></path>
+            <path d="M15 20v2"></path>
+            <path d="M2 15h2"></path>
+            <path d="M2 9h2"></path>
+            <path d="M20 15h2"></path>
+            <path d="M20 9h2"></path>
+            <path d="M9 2v2"></path>
+            <path d="M9 20v2"></path>
+          </svg>
+        ),
+        networks: (
+          <svg className="w-4 h-4 text-emerald-neon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <rect x="16" y="16" width="6" height="6" rx="1"></rect>
+            <rect x="2" y="16" width="6" height="6" rx="1"></rect>
+            <rect x="9" y="2" width="6" height="6" rx="1"></rect>
+            <path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"></path>
+            <path d="M12 12V8"></path>
+          </svg>
+        )
+      };
+
+      const skillsData = [
+        {
+          category: 'Languages',
+          badge: '01 // SYNTAX & LOGIC',
+          description: 'Core programming languages for algorithmic problem solving and scalable engineering.',
+          skills: [
+            { name: 'C++', icon: icons.cpp, level: 'Proficient', detail: 'STL & Competitive Coding' },
+            { name: 'Python', icon: icons.python, level: 'Proficient', detail: 'AI/ML, Automation & Backend' },
+            { name: 'JavaScript', icon: icons.javascript, level: 'Proficient', detail: 'Modern ES6+, DOM & Full-Stack' },
+            { name: 'Java', icon: icons.java, level: 'Familiar', detail: 'OOP & Backend Design' },
+            { name: 'TypeScript', icon: icons.typescript, level: 'Familiar', detail: 'Type Safety & Interfaces' },
+            { name: 'SQL', icon: icons.sql, level: 'Proficient', detail: 'Relational Schemas & Queries' }
+          ]
+        },
+        {
+          category: 'Frameworks & Tools',
+          badge: '02 // STACK & ECOSYSTEM',
+          description: 'Production frameworks, UI design systems, and modern developer toolchains.',
+          skills: [
+            { name: 'React', icon: icons.react, level: 'Proficient', detail: 'Hooks, State & SPA Architecture' },
+            { name: 'Tailwind CSS', icon: icons.tailwind, level: 'Proficient', detail: 'Responsive Cyber Glass UI' },
+            { name: 'Node.js', icon: icons.nodejs, level: 'Familiar', detail: 'REST APIs & Event Driven IO' },
+            { name: 'Git & GitHub', icon: icons.git, level: 'Proficient', detail: 'Branching, PRs & CI/CD' },
+            { name: 'FastAPI', icon: icons.fastapi, level: 'Familiar', detail: 'Async Python Microservices' },
+            { name: 'PyTorch', icon: icons.pytorch, level: 'Currently Learning', detail: 'Neural Networks & Tensors' },
+            { name: 'Docker', icon: icons.docker, level: 'Familiar', detail: 'Containerization & Builds' },
+            { name: 'Linux / Bash', icon: icons.linux, level: 'Proficient', detail: 'Shell Scripting & Server CLI' }
+          ]
+        },
+        {
+          category: 'Core CS Concepts',
+          badge: '03 // THEORETICAL BEDROCK',
+          description: 'Foundational computer science principles applied in software design and optimization.',
+          skills: [
+            { name: 'Data Structures', icon: icons.dsa, level: 'Proficient', detail: 'Trees, Graphs, Heaps & Maps' },
+            { name: 'Algorithms', icon: icons.algorithms, level: 'Proficient', detail: 'DP, Divide & Conquer, Greedy' },
+            { name: 'OOP', icon: icons.oop, level: 'Proficient', detail: 'Inheritance, Abstraction, Polymorphism' },
+            { name: 'DBMS', icon: icons.dbms, level: 'Proficient', detail: 'ACID, Indexing & Normalization' },
+            { name: 'Operating Systems', icon: icons.os, level: 'Familiar', detail: 'Concurrency, Memory & Kernel' },
+            { name: 'Computer Networks', icon: icons.networks, level: 'Familiar', detail: 'TCP/IP, Sockets & Protocols' }
+          ]
+        }
+      ];
+
+      const getLevelStyle = (level) => {
+        switch (level) {
+          case 'Proficient':
+            return {
+              dot: 'bg-emerald-neon shadow-[0_0_6px_#10b981]',
+              text: 'text-emerald-light'
+            };
+          case 'Familiar':
+            return {
+              dot: 'bg-lime-neon shadow-[0_0_6px_#a3e635]',
+              text: 'text-lime-bright'
+            };
+          case 'Currently Learning':
+          default:
+            return {
+              dot: 'bg-cyan-400 shadow-[0_0_6px_#22d3ee] animate-pulse',
+              text: 'text-cyan-300'
+            };
+        }
+      };
+
+      return (
+        <section
+          id="skills"
+          className="relative py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto z-10 scroll-mt-24"
+        >
+          {/* Section Header */}
+          <div className="flex flex-col items-center text-center mb-12">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-950/40 border border-emerald-500/30 text-emerald-light font-mono text-xs">
+              <span className="w-2 h-2 rounded-full bg-emerald-neon animate-pulse" />
+              <span>CAPABILITIES // TECHNICAL ARSENAL</span>
+            </div>
+
+            <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight">
+              Tech Stack & Skills
+            </h2>
+
+            <p className="mt-3 text-slate-400 max-w-2xl text-sm sm:text-base font-body leading-relaxed">
+              Languages, frameworks, and core computer science fundamentals powering my AI and web applications.
+            </p>
+
+            {/* Legend: Comfort Levels */}
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-xs font-mono text-slate-300 px-4 py-2 rounded-xl bg-carbon-100/70 border border-carbon-border backdrop-blur-sm">
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-emerald-neon shadow-[0_0_6px_#10b981]" />
+                <span className="text-emerald-light font-semibold">Proficient</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-lime-neon shadow-[0_0_6px_#a3e635]" />
+                <span className="text-lime-bright font-semibold">Familiar</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_6px_#22d3ee] animate-pulse" />
+                <span className="text-cyan-300 font-semibold">Currently Learning</span>
+              </div>
+            </div>
+          </div>
+
+          {/* 3 Tidy Category Panels */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 items-start">
+            {skillsData.map((cat, idx) => (
+              <div
+                key={idx}
+                className="rounded-2xl bg-carbon-100/80 backdrop-blur-md border border-emerald-500/20 p-6 sm:p-7 hover:border-emerald-500/40 shadow-[0_8px_24px_rgba(0,0,0,0.4)] hover:shadow-[0_12px_32px_rgba(16,185,129,0.15)] transition-all duration-300 flex flex-col justify-between h-full group"
+              >
+                <div>
+                  {/* Category Header */}
+                  <div className="flex items-center justify-between text-xs font-mono mb-3">
+                    <span className="text-emerald-neon font-bold tracking-wider uppercase">
+                      {cat.badge}
+                    </span>
+                    <span className="text-slate-500 text-[11px]">
+                      {cat.skills.length} Items
+                    </span>
+                  </div>
+
+                  <h3 className="text-xl font-bold text-white group-hover:text-emerald-light transition-colors">
+                    {cat.category}
+                  </h3>
+
+                  <p className="mt-1 text-xs text-slate-400 font-sans leading-relaxed mb-6">
+                    {cat.description}
+                  </p>
+
+                  {/* Interactive Pill Badges Grid */}
+                  <div className="flex flex-wrap gap-2.5">
+                    {cat.skills.map((skill, sIdx) => {
+                      const levelStyle = getLevelStyle(skill.level);
+
+                      return (
+                        <div
+                          key={sIdx}
+                          className="relative group/pill"
+                        >
+                          {/* Pill Badge */}
+                          <div className="px-3 py-2 rounded-xl bg-carbon-300/90 border border-emerald-500/20 hover:border-emerald-400 hover:bg-carbon-50 text-slate-200 hover:text-white transition-all duration-200 flex items-center gap-2 cursor-pointer shadow-sm hover:shadow-[0_0_15px_rgba(16,185,129,0.35)] hover:scale-105 active:scale-95">
+                            <span className="flex items-center justify-center">
+                              {skill.icon}
+                            </span>
+                            <span className="text-xs font-mono font-medium">
+                              {skill.name}
+                            </span>
+                          </div>
+
+                          {/* Interactive Floating Tooltip */}
+                          <div className="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2.5 opacity-0 group-hover/pill:opacity-100 group-hover/pill:-translate-y-1 transition-all duration-200 z-50 whitespace-nowrap">
+                            <div className="px-3 py-1.5 rounded-lg bg-[#090d12]/95 border border-emerald-500/40 text-[11px] font-mono shadow-[0_4px_20px_rgba(0,0,0,0.8)] backdrop-blur-md flex items-center gap-2">
+                              <span className={`w-1.5 h-1.5 rounded-full ${levelStyle.dot}`} />
+                              <span className="text-slate-400">Level:</span>
+                              <span className={`font-bold ${levelStyle.text}`}>{skill.level}</span>
+                              <span className="text-slate-600">//</span>
+                              <span className="text-slate-300 text-[10px]">{skill.detail}</span>
+                            </div>
+                            {/* Downward Caret Arrow */}
+                            <div className="w-2 h-2 bg-[#090d12] border-r border-b border-emerald-500/40 transform rotate-45 mx-auto -mt-1" />
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Bottom Category Status Bar */}
+                <div className="mt-8 pt-4 border-t border-carbon-border/80 flex items-center justify-between text-[11px] font-mono text-slate-400">
+                  <span className="text-emerald-accent/80">Active Stack // 2025</span>
+                  <span className="flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-neon animate-pulse" />
+                    <span>Verified</span>
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      );
+    };
+
+    // --- EDUCATION & CAMPUS JOURNEY COMPONENT ---
+    const EducationCampusJourney = () => {
+      const [activeMilestone, setActiveMilestone] = useState(0);
+
+      const milestones = [
+        {
+          year: '2026',
+          status: 'Current // Pre-Final Year',
+          title: 'Pre-Final Year B.Tech & Hackathon Finalist',
+          note: 'Specializing in AIML at KSIT Bengaluru; advancing to national-level hackathon finals with real-world edge computer vision prototypes.',
+          tags: ['AIML Core', 'Hackathon Finalist', 'Applied Research'],
+          icon: '🎯'
+        },
+        {
+          year: '2025',
+          status: 'Leadership & Dev',
+          title: 'Core Technical Club Member / Web Lead',
+          note: 'Spearheaded collegiate dev workshops, managed frontend portal architectures, and mentored 40+ engineering juniors in modern web technologies.',
+          tags: ['Web Lead', 'Mentorship', 'Workshops & Events'],
+          icon: '⚡'
+        },
+        {
+          year: '2024',
+          status: 'Degree Inception',
+          title: 'Began Degree & Built First Web App',
+          note: 'Commenced B.E. in Artificial Intelligence & Machine Learning at K S Institute of Technology and shipped my first production JavaScript application.',
+          tags: ['KSIT Bangalore', 'First Deployment', 'CS Foundations'],
+          icon: '🌱'
+        }
+      ];
+
+      const achievementBadges = [
+        {
+          icon: '🏆',
+          title: '1st Place - University Hackathon',
+          highlight: 'Hackathon Champion',
+          description: 'Winner among 40+ collegiate developer teams for intelligent edge vision tooling.'
+        },
+        {
+          icon: '⚡',
+          title: '150+ LeetCode Problems Solved',
+          highlight: 'DSA Mastery',
+          description: 'Consistent focus on algorithms, trees, dynamic programming, and graph theory.'
+        },
+        {
+          icon: '👥',
+          title: 'Tech Club Organizer',
+          highlight: 'Community Leader',
+          description: 'Hosted hands-on React & Python bootcamps for student engineering peers.'
+        },
+        {
+          icon: '📜',
+          title: 'Full-Stack Certified',
+          highlight: 'Verified Credential',
+          description: 'Accredited in Modern Full-Stack Web Development, Component Architecture & APIs.'
+        }
+      ];
+
+      return (
+        <section
+          id="campus-life"
+          className="relative py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto z-10 scroll-mt-24"
+        >
+          {/* Section Header */}
+          <div className="flex flex-col items-center text-center mb-12 sm:mb-16">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-950/40 border border-emerald-500/30 text-emerald-light font-mono text-xs">
+              <span className="w-2 h-2 rounded-full bg-emerald-neon animate-pulse" />
+              <span>ACADEMIA // CAMPUS MILESTONES</span>
+            </div>
+
+            <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight">
+              Education & Campus Journey
+            </h2>
+
+            <p className="mt-3 text-slate-400 max-w-2xl text-sm sm:text-base font-body leading-relaxed">
+              Tracking my engineering progression at K S Institute of Technology and student leadership accomplishments.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+            
+            {/* Left Column: Interactive Milestone Timeline */}
+            <div className="lg:col-span-7 relative">
+              <div className="flex items-center justify-between mb-6">
+                <span className="text-xs font-mono font-bold text-emerald-neon tracking-wider uppercase flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-emerald-neon" />
+                  <span>Chronological Milestones (2024 - 2026)</span>
+                </span>
+                <span className="text-[11px] font-mono text-slate-400">
+                  Hover node to inspect
+                </span>
+              </div>
+
+              <div className="relative pl-8 sm:pl-10 space-y-8">
+                {/* Illuminated Vertical Emerald Timeline Line */}
+                <div className="absolute left-3 sm:left-4 top-3 bottom-3 w-[2px] bg-gradient-to-b from-emerald-400 via-emerald-500 to-lime-neon shadow-[0_0_10px_#10b981]" />
+
+                {milestones.map((m, idx) => {
+                  const isSelected = activeMilestone === idx;
+
+                  return (
+                    <div
+                      key={idx}
+                      onMouseEnter={() => setActiveMilestone(idx)}
+                      className="relative group cursor-pointer"
+                    >
+                      {/* Glowing Nodal Dot on Line */}
+                      <div
+                        className={`absolute -left-8 sm:-left-10 top-5 w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 ${
+                          isSelected
+                            ? 'bg-carbon-50 border-2 border-emerald-400 shadow-[0_0_15px_#10b981] scale-110'
+                            : 'bg-carbon-100 border border-emerald-500/40 group-hover:border-emerald-400 group-hover:scale-105'
+                        }`}
+                      >
+                        <span className="w-2 h-2 rounded-full bg-emerald-neon" />
+                        {isSelected && (
+                          <span className="absolute w-full h-full rounded-full bg-emerald-neon/40 animate-ping" />
+                        )}
+                      </div>
+
+                      {/* Milestone Card */}
+                      <div
+                        className={`rounded-2xl p-5 sm:p-6 backdrop-blur-md border transition-all duration-300 relative overflow-hidden ${
+                          isSelected
+                            ? 'bg-carbon-100/95 border-emerald-500/50 shadow-[0_12px_30px_rgba(16,185,129,0.2)] -translate-y-1'
+                            : 'bg-carbon-100/70 border-carbon-border hover:border-emerald-500/30 hover:bg-carbon-100/90'
+                        }`}
+                      >
+                        {/* Top ambient highlight */}
+                        <div className="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-emerald-500/30 to-transparent pointer-events-none" />
+
+                        <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
+                          <div className="flex items-center gap-2">
+                            <span className="px-2.5 py-0.5 rounded-md bg-emerald-950/50 border border-emerald-500/30 text-emerald-300 font-mono text-xs font-bold">
+                              {m.year}
+                            </span>
+                            <span className="text-xs font-mono text-emerald-accent/90 font-medium">
+                              // {m.status}
+                            </span>
+                          </div>
+                          <span className="text-lg">{m.icon}</span>
+                        </div>
+
+                        <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-emerald-light transition-colors">
+                          {m.title}
+                        </h3>
+
+                        {/* Brief 1-Line Note */}
+                        <p className="mt-2 text-xs sm:text-sm text-slate-300/90 leading-relaxed font-sans">
+                          {m.note}
+                        </p>
+
+                        {/* Milestone Tags */}
+                        <div className="mt-4 flex flex-wrap gap-2">
+                          {m.tags.map((tag, tIdx) => (
+                            <span
+                              key={tIdx}
+                              className="px-2 py-0.5 rounded text-[10px] font-mono text-slate-300 bg-carbon-50 border border-carbon-border"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Right Column: Academic Overview & 2x2 Achievement Badges */}
+            <div className="lg:col-span-5 flex flex-col gap-6">
+              
+              {/* Academic Profile Snapshot Card */}
+              <div className="rounded-2xl bg-carbon-100/80 backdrop-blur-md border border-emerald-500/25 p-6 shadow-xl relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-full blur-2xl pointer-events-none" />
+
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-carbon-50 border border-emerald-500/30 flex items-center justify-center text-2xl shadow-[0_0_15px_rgba(16,185,129,0.2)] flex-shrink-0">
+                    🏛️
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-white">
+                      K S Institute of Technology
+                    </h3>
+                    <p className="text-xs font-mono text-emerald-neon">
+                      Bengaluru, Karnataka · Class of 2026
+                    </p>
+                    <p className="text-xs text-slate-300 mt-1">
+                      Department of Artificial Intelligence & Machine Learning (AIML)
+                    </p>
+                  </div>
+                </div>
+
+                <div className="mt-4 pt-4 border-t border-carbon-border grid grid-cols-2 gap-3 text-xs font-mono">
+                  <div className="p-2.5 rounded-xl bg-carbon-300 border border-carbon-border">
+                    <span className="text-slate-400 block text-[10px]">AFFILIATION</span>
+                    <span className="text-slate-200 font-semibold">VTU Recognized</span>
+                  </div>
+                  <div className="p-2.5 rounded-xl bg-carbon-300 border border-carbon-border">
+                    <span className="text-slate-400 block text-[10px]">ACADEMIC FOCUS</span>
+                    <span className="text-emerald-light font-semibold">AIML Core & Web</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Achievement Badges Header */}
+              <div className="flex items-center justify-between px-1">
+                <span className="text-xs font-mono font-bold text-slate-200 tracking-wider uppercase flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-lime-neon" />
+                  <span>Accomplishment Highlights</span>
+                </span>
+                <span className="text-[11px] font-mono text-emerald-neon">2x2 Grid</span>
+              </div>
+
+              {/* Compact 2x2 Grid of Accomplishment Callouts */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {achievementBadges.map((badge, idx) => (
+                  <div
+                    key={idx}
+                    className="rounded-xl bg-carbon-100/75 border border-emerald-500/20 hover:border-emerald-400 p-4 backdrop-blur-md transition-all duration-300 hover:shadow-[0_0_20px_rgba(16,185,129,0.25)] hover:bg-carbon-50 hover:-translate-y-1 group cursor-default flex flex-col justify-between"
+                  >
+                    <div>
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-2xl p-1.5 rounded-lg bg-carbon-50 border border-carbon-border group-hover:scale-110 transition-transform">
+                          {badge.icon}
+                        </span>
+                        <span className="text-[10px] font-mono font-semibold text-emerald-neon px-2 py-0.5 rounded bg-emerald-950/40 border border-emerald-500/20">
+                          {badge.highlight}
+                        </span>
+                      </div>
+
+                      <h4 className="text-xs sm:text-sm font-bold text-white group-hover:text-emerald-light transition-colors leading-snug">
+                        {badge.title}
+                      </h4>
+
+                      <p className="mt-1.5 text-[11px] text-slate-400 leading-relaxed font-sans">
+                        {badge.description}
+                      </p>
+                    </div>
+
+                    <div className="mt-3 pt-2 border-t border-carbon-border/60 flex items-center justify-between text-[10px] font-mono text-slate-500">
+                      <span className="group-hover:text-slate-400 transition-colors">Verified Student Credential</span>
+                      <span className="text-emerald-neon opacity-0 group-hover:opacity-100 transition-opacity">✓</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+            </div>
+
+          </div>
+        </section>
+      );
+    };
+
+    // --- MAGNETIC BUTTON HELPER ---
+    const MagneticButton = ({ children, className = "", onClick, href, target, rel, ...props }) => {
+      const btnRef = useRef(null);
+      const [offset, setOffset] = useState({ x: 0, y: 0 });
+
+      const handleMouseMove = (e) => {
+        if (!btnRef.current) return;
+        const rect = btnRef.current.getBoundingClientRect();
+        const x = e.clientX - (rect.left + rect.width / 2);
+        const y = e.clientY - (rect.top + rect.height / 2);
+        setOffset({ x: x * 0.22, y: y * 0.22 });
+      };
+
+      const handleMouseLeave = () => {
+        setOffset({ x: 0, y: 0 });
+      };
+
+      const Component = href ? 'a' : 'button';
+
+      return (
+        <Component
+          ref={btnRef}
+          href={href}
+          target={target}
+          rel={rel}
+          onClick={onClick}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
+          style={{
+            transform: `translate3d(${offset.x}px, ${offset.y}px, 0)`,
+            transition: 'transform 0.15s ease-out'
+          }}
+          className={className}
+          {...props}
+        >
+          {children}
+        </Component>
+      );
+    };
+
+    // --- CUSTOM CURSOR FOLLOWER & TRAILING SPARK (EASTER EGG) ---
+    const CursorSparkFollower = () => {
+      const [trailingPos, setTrailingPos] = useState({ x: -100, y: -100 });
+      const [isVisible, setIsVisible] = useState(false);
+      const [sparks, setSparks] = useState([]);
+
+      useEffect(() => {
+        let mouseX = -100;
+        let mouseY = -100;
+        let chaseX = -100;
+        let chaseY = -100;
+        let animId;
+
+        const onMouseMove = (e) => {
+          mouseX = e.clientX;
+          mouseY = e.clientY;
+          setIsVisible(true);
+        };
+
+        const onMouseLeave = () => {
+          setIsVisible(false);
+        };
+
+        const onClick = (e) => {
+          const newSparks = Array.from({ length: 6 }).map((_, i) => ({
+            id: Date.now() + i,
+            x: e.clientX,
+            y: e.clientY,
+            vx: (Math.random() - 0.5) * 5,
+            vy: (Math.random() - 0.5) * 5,
+            alpha: 1,
+            size: Math.random() * 3 + 2
+          }));
+          setSparks((prev) => [...prev.slice(-12), ...newSparks]);
+        };
+
+        const loop = () => {
+          chaseX += (mouseX - chaseX) * 0.18;
+          chaseY += (mouseY - chaseY) * 0.18;
+          setTrailingPos({ x: chaseX, y: chaseY });
+
+          setSparks((prev) =>
+            prev
+              .map((s) => ({
+                ...s,
+                x: s.x + s.vx,
+                y: s.y + s.vy,
+                alpha: s.alpha * 0.91,
+                size: s.size * 0.96
+              }))
+              .filter((s) => s.alpha > 0.05)
+          );
+
+          animId = requestAnimationFrame(loop);
+        };
+
+        window.addEventListener('mousemove', onMouseMove, { passive: true });
+        document.addEventListener('mouseleave', onMouseLeave);
+        window.addEventListener('click', onClick);
+        animId = requestAnimationFrame(loop);
+
+        return () => {
+          cancelAnimationFrame(animId);
+          window.removeEventListener('mousemove', onMouseMove);
+          document.removeEventListener('mouseleave', onMouseLeave);
+          window.removeEventListener('click', onClick);
+        };
+      }, []);
+
+      if (!isVisible) return null;
+
+      return (
+        <div className="pointer-events-none fixed inset-0 z-50 overflow-hidden hidden md:block">
+          <div
+            className="fixed w-10 h-10 rounded-full bg-emerald-500/20 blur-md pointer-events-none -translate-x-1/2 -translate-y-1/2 transition-opacity duration-300"
+            style={{
+              left: `${trailingPos.x}px`,
+              top: `${trailingPos.y}px`
+            }}
+          />
+          <div
+            className="fixed w-2 h-2 rounded-full bg-lime-neon shadow-[0_0_10px_#a3e635] pointer-events-none -translate-x-1/2 -translate-y-1/2"
+            style={{
+              left: `${trailingPos.x}px`,
+              top: `${trailingPos.y}px`
+            }}
+          />
+          {sparks.map((s) => (
+            <div
+              key={s.id}
+              className="fixed rounded-full bg-emerald-neon shadow-[0_0_8px_#10b981] pointer-events-none -translate-x-1/2 -translate-y-1/2"
+              style={{
+                left: `${s.x}px`,
+                top: `${s.y}px`,
+                width: `${s.size}px`,
+                height: `${s.size}px`,
+                opacity: s.alpha
+              }}
+            />
+          ))}
+        </div>
+      );
+    };
+
+    // --- STUDENT-FRIENDLY GET IN TOUCH SECTION ---
+    const ContactSection = ({ onToast }) => {
+      const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+      const [status, setStatus] = useState('idle');
+
+      const userEmail = "pranav.p16082007@gmail.com";
+
+      const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({ ...prev, [name]: value }));
+      };
+
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
+          onToast && onToast("⚠️ Please fill in all fields before sending.");
+          return;
+        }
+
+        setStatus('loading');
+
+        setTimeout(() => {
+          setStatus('success');
+          onToast && onToast(`🚀 Message transmitted to Pranav P! Thank you, ${formData.name}.`);
+          setFormData({ name: '', email: '', message: '' });
+
+          setTimeout(() => {
+            setStatus('idle');
+          }, 5000);
+        }, 1200);
+      };
+
+      const handleCopyEmail = (e) => {
+        e.preventDefault();
+        navigator.clipboard.writeText(userEmail);
+        onToast && onToast(`📋 Copied to clipboard: ${userEmail}`);
+      };
+
+      return (
+        <section
+          id="contact"
+          className="relative py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto z-10 scroll-mt-24"
+        >
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[350px] bg-emerald-500/10 rounded-full blur-[140px] pointer-events-none" />
+
+          {/* Section Header */}
+          <div className="flex flex-col items-center text-center mb-14">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-950/40 border border-emerald-500/30 text-emerald-light font-mono text-xs">
+              <span className="w-2 h-2 rounded-full bg-emerald-neon animate-pulse" />
+              <span>TRANSMISSION // INBOX</span>
+            </div>
+
+            <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight">
+              Let’s Collaborate & Build
+            </h2>
+
+            <p className="mt-3 text-slate-300 max-w-2xl text-sm sm:text-base font-body leading-relaxed">
+              Open for summer internships, open-source projects, or tech chats. Drop me a message!
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+            {/* Direct Links Column */}
+            <div className="lg:col-span-5 space-y-6">
+              <div className="rounded-2xl bg-carbon-100/80 backdrop-blur-md border border-emerald-500/20 p-6 sm:p-7 shadow-xl">
+                <h3 className="text-base font-bold text-white mb-2 flex items-center gap-2">
+                  <span className="text-emerald-neon font-mono text-xs">//</span>
+                  <span>Direct Channels</span>
+                </h3>
+                <p className="text-xs text-slate-400 mb-6 leading-relaxed">
+                  Reach out directly across professional networks or dispatch an email to my inbox.
+                </p>
+
+                <div className="space-y-3">
+                  {/* Email Link */}
+                  <div className="flex items-center gap-2">
+                    <MagneticButton
+                      href={`mailto:${userEmail}`}
+                      className="flex-1 px-4 py-3 rounded-xl bg-carbon-50 border border-emerald-500/30 hover:border-emerald-400 text-slate-200 hover:text-white flex items-center justify-between group shadow-sm hover:shadow-[0_0_20px_rgba(16,185,129,0.25)] transition-colors"
+                    >
+                      <div className="flex items-center gap-3">
+                        <span className="w-8 h-8 rounded-lg bg-emerald-950/50 border border-emerald-500/30 flex items-center justify-center text-emerald-light">
+                          ✉️
+                        </span>
+                        <div className="text-left">
+                          <div className="text-[10px] font-mono text-emerald-neon">EMAIL</div>
+                          <div className="text-xs font-mono truncate max-w-[180px] sm:max-w-none">
+                            {userEmail}
+                          </div>
+                        </div>
+                      </div>
+                      <span className="text-emerald-neon text-xs font-mono group-hover:translate-x-1 transition-transform">
+                        →
+                      </span>
+                    </MagneticButton>
+
+                    <button
+                      onClick={handleCopyEmail}
+                      className="p-3 rounded-xl bg-carbon-50 border border-emerald-500/30 hover:border-emerald-400 text-slate-300 hover:text-emerald-light transition-colors"
+                      title="Copy Email Address"
+                      aria-label="Copy email address"
+                    >
+                      <IconCopy className="w-4 h-4" />
+                    </button>
+                  </div>
+
+                  {/* GitHub Link */}
+                  <MagneticButton
+                    href="https://github.com/pranav-p"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full px-4 py-3 rounded-xl bg-carbon-50 border border-emerald-500/30 hover:border-emerald-400 text-slate-200 hover:text-white flex items-center justify-between group shadow-sm hover:shadow-[0_0_20px_rgba(16,185,129,0.25)] transition-colors"
+                  >
+                    <div className="flex items-center gap-3">
+                      <span className="w-8 h-8 rounded-lg bg-emerald-950/50 border border-emerald-500/30 flex items-center justify-center text-emerald-light">
+                        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+                        </svg>
+                      </span>
+                      <div className="text-left">
+                        <div className="text-[10px] font-mono text-emerald-neon">GITHUB</div>
+                        <div className="text-xs font-mono">github.com/pranav-p</div>
+                      </div>
+                    </div>
+                    <span className="text-emerald-neon text-xs font-mono group-hover:translate-x-1 transition-transform">
+                      ↗
+                    </span>
+                  </MagneticButton>
+
+                  {/* LinkedIn Link */}
+                  <MagneticButton
+                    href="https://linkedin.com/in/pranav-p"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full px-4 py-3 rounded-xl bg-carbon-50 border border-emerald-500/30 hover:border-emerald-400 text-slate-200 hover:text-white flex items-center justify-between group shadow-sm hover:shadow-[0_0_20px_rgba(16,185,129,0.25)] transition-colors"
+                  >
+                    <div className="flex items-center gap-3">
+                      <span className="w-8 h-8 rounded-lg bg-emerald-950/50 border border-emerald-500/30 flex items-center justify-center text-emerald-light">
+                        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451c.979 0 1.778-.773 1.778-1.729V1.73C24 .774 23.205 0 22.225 0z" />
+                        </svg>
+                      </span>
+                      <div className="text-left">
+                        <div className="text-[10px] font-mono text-emerald-neon">LINKEDIN</div>
+                        <div className="text-xs font-mono">linkedin.com/in/pranav-p</div>
+                      </div>
+                    </div>
+                    <span className="text-emerald-neon text-xs font-mono group-hover:translate-x-1 transition-transform">
+                      ↗
+                    </span>
+                  </MagneticButton>
+                </div>
+              </div>
+
+              {/* Quick Info Box */}
+              <div className="p-5 rounded-2xl bg-carbon-50/60 border border-carbon-border text-xs font-mono space-y-2.5">
+                <div className="flex items-center justify-between text-slate-300">
+                  <span className="text-slate-400">LOCATION</span>
+                  <span className="text-white font-semibold">Bengaluru, IN (IST)</span>
+                </div>
+                <div className="flex items-center justify-between text-slate-300">
+                  <span className="text-slate-400">AVAILABILITY</span>
+                  <span className="text-emerald-light font-semibold">Summer & Fall 2025</span>
+                </div>
+                <div className="flex items-center justify-between text-slate-300">
+                  <span className="text-slate-400">RESPONSE TIME</span>
+                  <span className="text-lime-bright font-semibold">&lt; 24 Hours</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Interactive Form Column */}
+            <div className="lg:col-span-7">
+              <div className="rounded-2xl bg-carbon-100/90 backdrop-blur-md border border-emerald-500/25 p-7 sm:p-9 shadow-2xl relative overflow-hidden">
+                <div className="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-emerald-500/40 to-transparent pointer-events-none" />
+
+                <form onSubmit={handleSubmit} className="space-y-5">
+                  <div>
+                    <label className="block text-xs font-mono font-semibold text-slate-300 mb-2">
+                      <span className="text-emerald-neon">01.</span> YOUR NAME
+                    </label>
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      placeholder="e.g. Alex Rivera"
+                      required
+                      className="w-full px-4 py-3 rounded-xl bg-carbon-400 border border-carbon-border text-slate-100 placeholder:text-slate-600 font-sans text-sm focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400/50 transition-all shadow-inner"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-mono font-semibold text-slate-300 mb-2">
+                      <span className="text-emerald-neon">02.</span> YOUR EMAIL
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      placeholder="e.g. alex@domain.com"
+                      required
+                      className="w-full px-4 py-3 rounded-xl bg-carbon-400 border border-carbon-border text-slate-100 placeholder:text-slate-600 font-sans text-sm focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400/50 transition-all shadow-inner"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-mono font-semibold text-slate-300 mb-2">
+                      <span className="text-emerald-neon">03.</span> YOUR MESSAGE
+                    </label>
+                    <textarea
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      rows="4"
+                      placeholder="Hey Pranav, let's connect regarding an internship opportunity or discuss building a project together..."
+                      required
+                      className="w-full px-4 py-3 rounded-xl bg-carbon-400 border border-carbon-border text-slate-100 placeholder:text-slate-600 font-sans text-sm focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400/50 transition-all resize-none shadow-inner"
+                    ></textarea>
+                  </div>
+
+                  <div className="pt-2">
+                    <button
+                      type="submit"
+                      disabled={status === 'loading'}
+                      className={`relative w-full py-4 px-6 rounded-xl font-mono text-sm font-bold flex items-center justify-center gap-2.5 transition-all duration-300 cursor-pointer ${
+                        status === 'success'
+                          ? 'bg-emerald-500 text-carbon shadow-[0_0_30px_#10b981]'
+                          : status === 'loading'
+                          ? 'bg-emerald-600/80 text-carbon cursor-wait'
+                          : 'bg-gradient-to-r from-emerald-500 via-emerald-400 to-lime-neon text-carbon shadow-[0_0_25px_rgba(16,185,129,0.45)] hover:shadow-[0_0_35px_rgba(16,185,129,0.7)] hover:-translate-y-0.5 active:translate-y-0'
+                      }`}
+                    >
+                      {status === 'loading' ? (
+                        <>
+                          <svg className="animate-spin h-4 w-4 text-carbon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                          </svg>
+                          <span>Transmitting...</span>
+                        </>
+                      ) : status === 'success' ? (
+                        <>
+                          <span>Message Sent! 🚀</span>
+                        </>
+                      ) : (
+                        <>
+                          <span>Send Message</span>
+                          <svg className="w-4 h-4 text-carbon group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                          </svg>
+                        </>
+                      )}
+                    </button>
+                  </div>
+
+                  {status === 'success' && (
+                    <div className="p-3 rounded-xl bg-emerald-950/40 border border-emerald-500/40 text-center text-xs font-mono text-emerald-light animate-fadeIn">
+                      ✓ Dispatch confirmed! Pranav will respond within 24 hours.
+                    </div>
+                  )}
+                </form>
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+    };
+
+    // --- TOAST NOTIFICATION MODAL ---
+    const Toast = ({ message, type = "success", onClose }) => {
+      useEffect(() => {
+        const timer = setTimeout(onClose, 4000);
+        return () => clearTimeout(timer);
+      }, [onClose]);
+
+      return (
+        <div className="fixed bottom-6 right-6 z-50 flex items-center gap-3 px-4 py-3 rounded-xl bg-carbon-50 border border-emerald-500/50 text-slate-100 shadow-[0_10px_30px_rgba(0,0,0,0.8)] shadow-emerald-950/40 backdrop-blur-md animate-bounce">
+          <span className="w-2.5 h-2.5 rounded-full bg-emerald-neon animate-pulse" />
+          <span className="font-mono text-xs text-emerald-200">{message}</span>
+          <button onClick={onClose} className="text-slate-400 hover:text-white ml-2 text-xs font-mono">
+            ✕
+          </button>
+        </div>
+      );
+    };
+
+    // --- MAIN APP COMPONENT ---
+    const App = () => {
+      const [toastMessage, setToastMessage] = useState(null);
+
+      const handleDownloadResume = () => {
+        setToastMessage("📄 Generating Pranav_P_Resume_AIML.pdf (Internship Ready)...");
+        const dummyResumeContent = `PRANAV P - STUDENT DEVELOPER RESUME
+Education: B.E. in Artificial Intelligence & Machine Learning (AIML)
+College: K S Institute of Technology, Bengaluru
+Email: pranav.p16082007@gmail.com
+Role: Open for Web Development & AI Internships
+Skills: React, Tailwind CSS, TypeScript, Python, PyTorch, FastAPI, Node.js
+Portfolio: Hey, I am Pranav P — Building the Future of Tech.`;
+
+        const blob = new Blob([dummyResumeContent], { type: 'text/plain' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'Pranav_P_Resume_AIML_KSIT.txt';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+      };
+
+      const handleViewProjects = () => {
+        const projectsEl = document.getElementById('projects');
+        if (projectsEl) {
+          projectsEl.scrollIntoView({ behavior: 'smooth' });
+          setToastMessage("🚀 Navigating to Pranav's Featured Projects");
+        }
+      };
+
+      const handleProjectAction = (project, actionType) => {
+        if (actionType === 'demo') {
+          setToastMessage(`🚀 Opening Live Demo: ${project.title}`);
+          window.open(project.demoUrl || '#', '_blank', 'noopener,noreferrer');
+        } else if (actionType === 'github') {
+          setToastMessage(`💻 Opening GitHub Repository: ${project.title}`);
+          window.open(project.githubUrl || '#', '_blank', 'noopener,noreferrer');
+        }
+      };
+
+      const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      };
+
+      return (
+        <div className="relative min-h-screen bg-carbon overflow-x-hidden selection:bg-emerald-500 selection:text-carbon">
+          {/* Subtle HTML5 Interactive Canvas Background */}
+          <MatrixGridCanvas rippleMultiplier={1} showConstellations={true} />
+
+          {/* Custom Cursor Follower & Trailing Light Spark (Easter Egg) */}
+          <CursorSparkFollower />
+
+          {/* Floating Frosted-Glass Navigation Bar */}
+          <Navbar
+            onDownloadResume={handleDownloadResume}
+            onViewProjects={handleViewProjects}
+          />
+
+          {/* Main Content Sections */}
+          <main>
+            {/* 1. Hero Intro Screen */}
+            <Hero
+              onDownloadResume={handleDownloadResume}
+              onViewProjects={handleViewProjects}
+            />
+
+            {/* 2. Featured Projects Showcase */}
+            <FeaturedProjects onAction={handleProjectAction} />
+
+            {/* 3. Interactive Tech Stack & Skills */}
+            <TechStackSkills />
+
+            {/* 4. Education & Campus Journey */}
+            <EducationCampusJourney />
+
+            {/* 5. About Me Section */}
+            <SectionContainer
+              id="about"
+              badge="PROFILE // BIO"
+              title="About Me"
+              subtitle="Merging engineering rigor with forward-thinking AI applications."
+            >
+              <AboutPreview />
+            </SectionContainer>
+
+            {/* 6. Student-Friendly Contact Section */}
+            <ContactSection onToast={(msg) => setToastMessage(msg)} />
+          </main>
+
+          {/* Polished Cyber Footer with Requested Exact Centered Line */}
+          <footer className="relative z-10 py-12 border-t border-carbon-border/60 bg-carbon-100/70 backdrop-blur-md">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center gap-4 text-center">
+              
+              {/* Centered Line requested by User */}
+              <div className="text-sm font-mono text-slate-300 flex items-center justify-center flex-wrap gap-2">
+                <span>Designed & Engineered by</span>
+                <span className="text-emerald-neon font-bold">PRANAV P</span>
+                <span className="text-emerald-500/60 font-bold">•</span>
+                <span className="text-slate-300 font-semibold">Class of 2029.</span>
+              </div>
+
+              {/* Sub-Details & Status */}
+              <div className="flex flex-wrap items-center justify-center gap-4 text-xs font-mono text-slate-400">
+                <span className="flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-neon animate-pulse" />
+                  <span>KSIT Bengaluru // AIML</span>
+                </span>
+                <span>•</span>
+                <a
+                  href="mailto:pranav.p16082007@gmail.com"
+                  className="hover:text-emerald-light transition-colors"
+                >
+                  pranav.p16082007@gmail.com
+                </a>
+                <span>•</span>
+                <button
+                  onClick={scrollToTop}
+                  className="text-emerald-neon hover:text-lime-neon transition-colors flex items-center gap-1"
+                >
+                  <span>Back to Top</span>
+                  <span>↑</span>
+                </button>
+              </div>
+            </div>
+          </footer>
+
+          {/* Toast Feedback */}
+          {toastMessage && (
+            <Toast message={toastMessage} onClose={() => setToastMessage(null)} />
+          )}
+        </div>
+      );
+    };
+
+    // Mount to Root
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>
